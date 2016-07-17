@@ -77,5 +77,6 @@ will be passed along. Actual `result` will always be the last value.
     
 TODO:
 
-XXX value can be a `list` of maps where multiple HTTPs required
-XXX Are we using the `ajax-request` API?  If so, I wonder why?
+  - XXX value can be a `list` of maps where multiple HTTPs required
+  - XXX Are we using the `ajax-request` API?  If so, I wonder why?
+  - XXX could we introduce the notion of `delay`.  Wait N ms before actioning. To assist with retries?
