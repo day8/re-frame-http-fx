@@ -1,21 +1,28 @@
 > Status:  still under development. Don't use yet.
 
-## Async HTTP In re-frame
+[![Clojars Project](https://img.shields.io/clojars/v/re-frame-http-fx/latest-version.svg)](https://clojars.org/re-frame-http-fx)
+[![GitHub license](https://img.shields.io/github/license/Day8/re-frame-http-fx.svg)](license.txt)
+[![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
+[![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop)
 
-Herein a re-frame effects handler, named `:http` takes a declarative specification of HTTP requests. Leverages the [cljs-ajax](https://github.com/JulianBirch/cljs-ajax) library and emits on-success and on-failure re-frame events
+## HTTP Effect For re-frame
+
+Herein a re-frame ["effects handler"](https://github.com/Day8/re-frame/wiki/Effectful-Event-Handlers), 
+keyed `:http`, which leverages [cljs-ajax](https://github.com/JulianBirch/cljs-ajax). 
 
 ## Quick Start Guide
  
 ### Step 1. Add Dependency
  
 Add the following project dependency:  
-[![Clojars Project](http://clojars.org/re-frame-http-fx/latest-version.svg)](http://clojars.org/re-frame-http-fx)
+[![Clojars Project](https://img.shields.io/clojars/v/re-frame-http-fx/latest-version.svg)](https://clojars.org/re-frame-http-fx)
 
 
-### Step 2. Registration
+### Step 2. Registration And Use
 
-In your root namespace, called perhaps `core.cljs`, in the `ns`...
+In the namespace where you register your event handlers, perhaps called `events.cljs`, you have 2 things to do.
 
+**First**, add this "require" to the `ns`:
 ```clj
 (ns app.core
   (:require 
@@ -23,39 +30,48 @@ In your root namespace, called perhaps `core.cljs`, in the `ns`...
     [re-frame-http-fx]   ;; <-- add this
     ...))
 ```
-Because we never subsequently use this namespace, it 
-appears redundant.  But the require will cause the `:http` effect handler to self-register with re-frame, which is important to everything that follows.
 
-###Step 3. Event handler
-In your event handlers namespace, perhaps called `events.cljs`...
 
-Write the event handler which will use this effect :
+Because we never subsequently use this require, it 
+appears redundant.  But its existence will cause the `:http` effect 
+handler to self-register with re-frame, which is important
+to everything that follows.
 
+**Second**, write a an event handler which uese this effect:
 ```clj
-(def-event-fx                    ;; note the fx
-  :handler-with-http             ;; usage:  (dispatch [:handler-with-http])
-  (fn [_ _]
-    {:db   (.....)               ;; whatever effect on db you need if any
+(def-event-fx                    ;; note the trailing -fx
+  :some-handler-with-http        ;; usage:  (dispatch [:handler-with-http])
+  (fn [{:keys [db]} _]           ;; the first param will be "world" 
+    {:db   (assoc db :show-twirly true)   ;; causes the twirly-waiting-dialog to show??
      :http {:method     :get
             :uri        "https://api.github.com/orgs/day8"
             :on-success [:good-http-result]
             :on-failure [:bad-http-result]}}))
 ```
 
-Look at the :http line above. This library defines the "effect handler" which implements `:http`. It takes an options map. Apart from the `:on-success` and `:on-failure` the remaining args are as per the [cljs-ajax api docs](https://github.com/JulianBirch/cljs-ajax)
+Look at the `:http` line above. This library defines the "effect handler" 
+which implements `:http`. 
 
-###Step 4. Handlers for :on-success and :on-failure
+It takes an options map. Apart from the `:on-success` and `:on-failure` the remaining args are as per the [cljs-ajax api docs](https://github.com/JulianBirch/cljs-ajax)
 
-Define normal re-frame handlers for :on-success and :on-failure. You event handlers will get the result as the last arg of their event-v. Here is an example written as another effect handler to put the result into db.
+###Step 3. Handlers for :on-success and :on-failure
+
+Provide normal re-frame handlers for :on-success and :on-failure. You event 
+handlers will get the result as the last arg of their event-v. Here is an 
+example written as another effect handler to put the result into db.
 
 ```clj
-(def-event-fx
+(def-event
   :good-http-result
-  (fn [context [_ result]
-    {:db   (assoc-in context [:db :http-result] result)}))  ;; apply whatever effect on db you need
+  (fn [db [_ result]
+    (assoc db :api-result result)}))
 ```
 
-The result passed to your :on-failure is always a map with various xhrio details provided. See the fn [ajax-handler](/src/re-frame-http-fx.core.cljs) for details
+The result passed to your :on-failure is always a map with various xhrio details provided. 
+See the fn [ajax-handler](/src/re-frame-http-fx.core.cljs) for details
+
 ###TIP:
-If you need additional arguments or identifying tokens in your handler, then include them in your `:on-success` and `:on-failure` event vector in Step 3. they will be passed along. Actual `result` will always be the last value.
+If you need additional arguments or identifying tokens in your handler, then 
+include them in your `:on-success` and `:on-failure` event vector in Step 3. they 
+will be passed along. Actual `result` will always be the last value.
     
