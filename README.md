@@ -5,7 +5,7 @@
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop)
 
-## HTTP Effect For re-frame
+## HTTP Effects Handler For re-frame
 
 Herein a re-frame ["effects handler"](https://github.com/Day8/re-frame/wiki/Effectful-Event-Handlers), 
 keyed `:http`, which leverages [cljs-ajax](https://github.com/JulianBirch/cljs-ajax). 
@@ -31,13 +31,12 @@ In the namespace where you register your event handlers, perhaps called `events.
     ...))
 ```
 
-
-Because we never subsequently use this require, it 
+Because we never subsequently use this `require`, it 
 appears redundant.  But its existence will cause the `:http` effect 
 handler to self-register with re-frame, which is important
 to everything that follows.
 
-**Second**, write a an event handler which uese this effect:
+**Second**, write a an event handler which uses this effect:
 ```clj
 (def-event-fx                    ;; note the trailing -fx
   :some-handler-with-http        ;; usage:  (dispatch [:handler-with-http])
@@ -52,7 +51,8 @@ to everything that follows.
 Look at the `:http` line above. This library defines the "effect handler" 
 which implements `:http`. 
 
-It takes an options map. Apart from the `:on-success` and `:on-failure` the remaining args are as per the [cljs-ajax api docs](https://github.com/JulianBirch/cljs-ajax)
+The value supplied should be an options map as per [cljs-ajax api docs](https://github.com/JulianBirch/cljs-ajax). 
+Except for `:on-success` and `:on-failure`.
 
 ###Step 3. Handlers for :on-success and :on-failure
 
@@ -75,3 +75,7 @@ If you need additional arguments or identifying tokens in your handler, then
 include them in your `:on-success` and `:on-failure` event vector in Step 3. they 
 will be passed along. Actual `result` will always be the last value.
     
+TODO:
+
+XXX value can be a `list` of maps where multiple HTTPs required
+XXX Are we using the `ajax-request` API?  If so, I wonder why?
