@@ -1,8 +1,7 @@
 (ns re-frame-http-fx.core
   (:require
     [goog.net.ErrorCode :as errors]
-    [re-frame.core      :refer [def-fx dispatch]]
-    [re-frame.loggers   :refer [console]]
+    [re-frame.core      :refer [def-fx dispatch console]]
     [ajax.core          :as ajax]))
 
 ;; I provide the :http effect handler leveraging cljs-ajax lib
