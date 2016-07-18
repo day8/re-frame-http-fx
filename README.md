@@ -51,8 +51,15 @@ to everything that follows.
 Look at the `:http` line above. This library defines the "effect handler"
 which implements `:http`.
 
-The value supplied should be an options map as per [cljs-ajax api docs](https://github.com/JulianBirch/cljs-ajax).
+The value supplied should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request).
 Except for `:on-success` and `:on-failure`.
+This library provides these defaults if omitted:
+
+```clj
+    :api             js/goog.net.XhrIo
+    :response-format cljs-ajax/detect-response-format
+``` 
+
 
 You can also pass a list or vector of these options maps where multiple HTTPs are required.
 
@@ -78,5 +85,4 @@ include them in your `:on-success` and `:on-failure` event vector in Step 3. the
 will be passed along. Actual `result` will always be the last value.
 
 TODO:
-- XXX Are we using the `ajax-request` API?  If so, I wonder why?
 - XXX could we introduce the notion of `delay`.  Wait N ms before actioning. To assist with retries?
