@@ -2,6 +2,7 @@
   (:require
     [goog.net.ErrorCode :as errors]
     [re-frame.core      :refer [def-fx dispatch]]
+    [re-frame.loggers   :refer [console]]
     [ajax.core          :as ajax]))
 
 ;; I provide the :http effect handler leveraging cljs-ajax lib
@@ -57,7 +58,14 @@
 
 (def-fx
   :http
-  (fn [http-spec]
+  (fn http-effect [http-spec]
     ;;TODO verify with Spec
-    (let [options (spec->ajax-options http-spec)]
-      (ajax/ajax-request options))))
+    (cond
+      (or (list? http-spec) (vector? http-spec))
+      (doseq [each http-spec] (http-effect each))
+
+      (map? http-spec)
+      (-> http-spec spec->ajax-options ajax/ajax-request)
+
+      :else
+      (console :error "re-frame-http-fx: expected :http effect to be a list or vector or map, but got: " http-spec))))
