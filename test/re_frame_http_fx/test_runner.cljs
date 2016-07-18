@@ -16,8 +16,7 @@
 
 
 (defn ^:export run-html-tests []
-  (cljs-test/run-tests
-    're-frame-http-fx.core-test))
+  (cljs-test/run-all-tests #"re-frame-http-fx.*-test"))
 
 ;; ---- KARMA  -----------------------------------------------------------------
 
