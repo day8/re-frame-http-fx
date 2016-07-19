@@ -1,4 +1,4 @@
-(defproject re-frame-http-fx "0.0.1-SNAPSHOT"
+(defproject day8.re-frame/http-fx "0.0.1-SNAPSHOT"
   :description  "A re-frame effects handler for performing Ajax tasks"
   :url          "https://github.com/Day8/re-frame-http-fx.git"
   :license      {:name "MIT"}
@@ -25,8 +25,17 @@
                                       :macosx  "open"
                                       :linux   "xdg-open"}}}
 
-  :deploy-repositories [["releases" :clojars {:sign-releases false}]
-                        ["snapshots" :clojars {:sign-releases false}]]
+  :deploy-repositories [["releases"  {:sign-releases false :url "https://clojars.org/repo"}]
+                        ["snapshots" {:sign-releases false :url "https://clojars.org/repo"}]]
+
+  :release-tasks [["vcs" "assert-committed"]
+                  ["change" "version" "leiningen.release/bump-version" "release"]
+                  ["vcs" "commit"]
+                  ["vcs" "tag" "v" "--no-sign"]
+                  ["deploy"]
+                  ["change" "version" "leiningen.release/bump-version"]
+                  ["vcs" "commit"]
+                  ["vcs" "push"]]
 
   :npm {:dependencies [[karma                 "1.0.0"]
                        [karma-cljs-test       "0.1.0"]
