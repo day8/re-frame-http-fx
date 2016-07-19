@@ -38,9 +38,9 @@ to everything that follows.
 
 **Second**, write a an event handler which uses this effect:
 ```clj
-(def-event-fx                    ;; note the trailing -fx
-  :some-handler-with-http        ;; usage:  (dispatch [:handler-with-http])
-  (fn [{:keys [db]} _]           ;; the first param will be "world"
+(def-event-fx                             ;; note the trailing -fx
+  :handler-with-http                      ;; usage:  (dispatch [:handler-with-http])
+  (fn [{:keys [db]} _]                    ;; the first param will be "world"
     {:db   (assoc db :show-twirly true)   ;; causes the twirly-waiting-dialog to show??
      :http-xhrio {:method          :get
                   :uri             "https://api.github.com/orgs/day8"
@@ -50,7 +50,7 @@ to everything that follows.
                   :on-failure      [:bad-http-result]}}))
 ```
 
-Look at the `:http-xhrio` line above. This library defines the "effect handler"
+Look at the `:http-xhrio` line above. This library defines the "effects handler"
 which implements `:http-xhrio`.
 
 The supplied value should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request).
