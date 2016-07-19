@@ -12,7 +12,7 @@ pom.xml.asc
 core/
 out/
 target/
-compiled/
+run/compiled/
 misc/
 .floo
 .flooignore

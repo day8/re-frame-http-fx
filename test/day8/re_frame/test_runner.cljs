@@ -1,10 +1,10 @@
-(ns re-frame-http-fx.test-runner
+(ns day8.re-frame.http-fx.test-runner
   (:require
     [cljs.test         :as cljs-test :include-macros true]
     [jx.reporter.karma :as karma :include-macros true]
     [devtools.core     :as devtools]
     ;; Test Namespaces -------------------------------
-    [re-frame-http-fx.core-test])
+    [day8.re-frame.http-fx-test])
   (:refer-clojure :exclude (set-print-fn!)))
 
 (enable-console-print!)
@@ -16,11 +16,11 @@
 
 
 (defn ^:export run-html-tests []
-  (cljs-test/run-all-tests #"re-frame-http-fx.*-test"))
+  (cljs-test/run-all-tests #"day8.re-frame.http-fx.*-test"))
 
 ;; ---- KARMA  -----------------------------------------------------------------
 
 (defn ^:export run-karma [karma]
   (karma/run-tests
     karma
-    're-frame-http-fx.core-test))
+    'day8.re-frame.http-fx-test))

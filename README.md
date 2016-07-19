@@ -1,6 +1,6 @@
 > Status:  still under development. Don't use yet.
 
-[![Clojars Project](https://img.shields.io/clojars/v/re-frame-http-fx/latest-version.svg)](https://clojars.org/re-frame-http-fx)
+[![Clojars Project](https://img.shields.io/clojars/v/day8.re-frame.http-fx/latest-version.svg)](https://clojars.org/day8.re-frame.http-fx)
 [![GitHub license](https://img.shields.io/github/license/Day8/re-frame-http-fx.svg)](license.txt)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop)
@@ -77,7 +77,7 @@ example written as another effect handler to put the result into db.
 ```
 
 The result passed to your :on-failure is always a map with various xhrio details provided.
-See the fn [ajax-handler](/src/re-frame-http-fx.core.cljs) for details
+See the fn [ajax-handler](/src/day8.re-frame.http-fx.cljs) for details
 
 ###TIP:
 If you need additional arguments or identifying tokens in your handler, then

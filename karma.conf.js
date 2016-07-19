@@ -11,7 +11,7 @@ module.exports = function (config) {
         ],
 
         client: {
-            args: ['re_frame_http_fx.test_runner.run_karma']
+            args: ['day8.re_frame.http_fx.test_runner.run_karma']
         },
 
         // the default configuration
