@@ -27,12 +27,12 @@ In the namespace where you register your event handlers, perhaps called `events.
 (ns app.core
   (:require
     ...
-    [re-frame-http-fx]   ;; <-- add this
+    [day8.re-frame.http-fx]   ;; <-- add this
     ...))
 ```
 
 Because we never subsequently use this `require`, it
-appears redundant.  But its existence will cause the `:http` effect
+appears redundant.  But its existence will cause the `:http-xhrio` effect
 handler to self-register with re-frame, which is important
 to everything that follows.
 
