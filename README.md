@@ -8,7 +8,7 @@
 ## HTTP Effects Handler For re-frame
 
 Herein a re-frame ["effects handler"](https://github.com/Day8/re-frame/wiki/Effectful-Event-Handlers),
-keyed `:http`, which leverages [cljs-ajax](https://github.com/JulianBirch/cljs-ajax).
+keyed `:http-xhrio`, which leverages [cljs-ajax](https://github.com/JulianBirch/cljs-ajax) using the goog xhrio API. Whilst cljs-ajax supports other APIs, this library currently only provides xhrio but others could easily be added e.g. as **:http-xml** or **:http-apache**
 
 ## Quick Start Guide
 
@@ -42,24 +42,24 @@ to everything that follows.
   :some-handler-with-http        ;; usage:  (dispatch [:handler-with-http])
   (fn [{:keys [db]} _]           ;; the first param will be "world"
     {:db   (assoc db :show-twirly true)   ;; causes the twirly-waiting-dialog to show??
-     :http {:method     :get
-            :uri        "https://api.github.com/orgs/day8"
-            :on-success [:good-http-result]
-            :on-failure [:bad-http-result]}}))
+     :http-xhrio {:method          :get
+                  :uri             "https://api.github.com/orgs/day8"
+                  :timeout         8000                                           ;; optional see API docs
+                  :response-format (ajax/json-response-format {:keywords? true})  ;; optional see API docs
+                  :on-success      [:good-http-result]
+                  :on-failure      [:bad-http-result]}}))
 ```
 
-Look at the `:http` line above. This library defines the "effect handler"
-which implements `:http`.
+Look at the `:http-xhrio` line above. This library defines the "effect handler"
+which implements `:http-xhrio`.
 
-The value supplied should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request).
+The supplied value should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request).
 Except for `:on-success` and `:on-failure`.
-This library provides these defaults if omitted:
 
-```clj
-    :api             js/goog.net.XhrIo
-    :response-format cljs-ajax/detect-response-format
-``` 
+Don't provide:
 
+     :api     - the effects handler explicitly uses xhrio so it will be ignored.
+     :handler - we substitute this with one that dispatches the :on-success & :on-failure
 
 You can also pass a list or vector of these options maps where multiple HTTPs are required.
 
