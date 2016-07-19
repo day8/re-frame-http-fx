@@ -1,7 +1,7 @@
 (ns re-frame-http-fx.core-test
   (:require
     [ajax.core     :as ajax]
-    [cljs.test     :refer-macros [is deftest async]]
+    [cljs.test     :refer-macros [is deftest async use-fixtures]]
     [cljs.spec     :as s]
     [re-frame.core :as re-frame]
     [re-frame-http-fx.core]))
@@ -10,8 +10,16 @@
 (s/def ::api-result
   (s/keys :req-un [::type ::issues_url ::url ::public_repos])) ;; loose spec
 
-;; ---- TESTS ------------------------------------------------------------------
+;; ---- FIXTURES ---------------------------------------------------------------
 
+(defn teardown! []
+  ; cleanup up our handlers
+  (doseq [event [::http-test ::good-http-result ::bad-http-result]]
+    (re-frame/clear-event! event)))
+
+(use-fixtures :each {:after teardown!})
+
+;; ---- TESTS ------------------------------------------------------------------
 
 (deftest xhrio-get
   ;; Setup effects handler with :http-xhrio specifying an ajax-request.
