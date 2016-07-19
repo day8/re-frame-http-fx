@@ -2,7 +2,8 @@
   (:require
     [goog.net.ErrorCode :as errors]
     [re-frame.core      :refer [def-fx dispatch console]]
-    [ajax.core          :as ajax]))
+    [ajax.core          :as ajax]
+    [cljs.spec          :as s]))
 
 ;; I provide the :http effect handler leveraging cljs-ajax lib
 ;; see API docs https://github.com/JulianBirch/cljs-ajax
@@ -37,14 +38,14 @@
 
 
 (defn spec->ajax-options
-  [{:as   http-spec
+  [{:as   request
     :keys [on-success on-failure api response-format]
     :or   {on-success      [:http-no-on-success]
            on-failure      [:http-no-on-failure]
            api             (new js/goog.net.XhrIo)
            response-format (ajax/detect-response-format)}}]
   ; wrap events in cljs-ajax callbacks
-  (-> http-spec
+  (-> request
       (assoc
         :api             api
         :response-format response-format
@@ -54,17 +55,16 @@
                                  api))
       (dissoc :on-success :on-failure)))
 
+(s/def ::sequential-or-map (s/or :list-or-vector sequential? :map map?))
 
 (def-fx
   :http
-  (fn http-effect [http-spec]
-    ;;TODO verify with Spec
+  (fn http-effect [request]
+    (when (= :cljs.spec/invalid (s/conform ::sequential-or-map request))
+      (console :error (s/explain-str ::sequential-or-map request)))
+    ;;TODO verify detail request(s) using spec for ajax-request api
     (cond
-      (or (list? http-spec) (vector? http-spec))
-      (doseq [each http-spec] (http-effect each))
-
-      (map? http-spec)
-      (-> http-spec spec->ajax-options ajax/ajax-request)
-
+      (sequential? request) (doseq [each request] (http-effect each))
+      (map? request)        (-> request spec->ajax-options ajax/ajax-request)
       :else
-      (console :error "re-frame-http-fx: expected :http effect to be a list or vector or map, but got: " http-spec))))
+      (console :error "re-frame-http-fx: expected request to be a list or vector or map, but got: " request))))
