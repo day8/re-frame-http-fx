@@ -30,7 +30,7 @@
   ;; to fail unless there is something wrong with your internet or github.
   (re-frame/def-event-fx
     ::http-test
-    (fn [_context _event-v]
+    (fn [_world _event-v]
       {:http-xhrio {:method          :get
                     :uri             "https://api.github.com/orgs/day8"
                     :timeout         5000
