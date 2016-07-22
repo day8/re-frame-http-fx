@@ -1,6 +1,6 @@
-> Status:  still under development. Don't use yet.
+> Status:  still under development. Use At Your Own Risk
 
-[![Clojars Project](https://img.shields.io/clojars/v/day8.re-frame.http-fx/latest-version.svg)](https://clojars.org/day8.re-frame.http-fx)
+
 [![GitHub license](https://img.shields.io/github/license/Day8/re-frame-http-fx.svg)](license.txt)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop)
@@ -14,9 +14,8 @@ keyed `:http-xhrio`, which leverages [cljs-ajax](https://github.com/JulianBirch/
 
 ### Step 1. Add Dependency
 
-Add the following project dependency:
-[![Clojars Project](https://img.shields.io/clojars/v/re-frame-http-fx/latest-version.svg)](https://clojars.org/re-frame-http-fx)
-
+Add the following project dependency: <br>
+[![Clojars Project](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
 
 ### Step 2. Registration And Use
 
