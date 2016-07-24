@@ -1,10 +1,10 @@
-(defproject day8.re-frame/http-fx "0.0.3-SNAPSHOT"
+(defproject day8.re-frame/http-fx "0.0.3"
   :description  "A re-frame effects handler for performing Ajax tasks"
   :url          "https://github.com/Day8/re-frame-http-fx.git"
   :license      {:name "MIT"}
   :dependencies [[org.clojure/clojure        "1.8.0"]
                  [org.clojure/clojurescript  "1.9.89"]
-                 [re-frame                   "0.8.0-alpha2"]
+                 [re-frame                   "0.8.0-alpha3"]
                  [cljs-ajax                  "0.5.8"]]
 
   :profiles {:debug {:debug true}

@@ -28,7 +28,7 @@
   ;; for more details https://github.com/JulianBirch/cljs-ajax#ajax-request
   ;; We specify an :on-failure for completeness but we don't expect the request
   ;; to fail unless there is something wrong with your internet or github.
-  (re-frame/def-event-fx
+  (re-frame/reg-event-fx
     ::http-test
     (fn [_world _event-v]
       {:http-xhrio {:method          :get
@@ -40,7 +40,7 @@
     (async done
 
       ;; setup success handler
-      (re-frame/def-event
+      (re-frame/reg-event
         ::good-http-result
         (fn [db [_ token result]]
           (is (= "test-token1" token) "expected: token passed through")
@@ -52,7 +52,7 @@
           db))
 
       ;; setup failure handler
-      (re-frame/def-event
+      (re-frame/reg-event
         ::bad-http-result
         (fn [db [_ token error]]
           (is (= "test-token1" token) "expected: token passed through")

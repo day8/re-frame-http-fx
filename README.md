@@ -1,5 +1,7 @@
-> Status:  still under development. Use At Your Own Risk
-
+>
+> Status: freshly minted. Please report issues. 
+> Requires re-frame >= v0.8.0-alpha3
+>
 
 [![GitHub license](https://img.shields.io/github/license/Day8/re-frame-http-fx.svg)](license.txt)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
@@ -37,7 +39,7 @@ to everything that follows.
 
 **Second**, write a an event handler which uses this effect:
 ```clj
-(def-event-fx                             ;; note the trailing -fx
+(reg-event-fx                             ;; note the trailing -fx
   :handler-with-http                      ;; usage:  (dispatch [:handler-with-http])
   (fn [{:keys [db]} _]                    ;; the first param will be "world"
     {:db   (assoc db :show-twirly true)   ;; causes the twirly-waiting-dialog to show??
@@ -69,7 +71,7 @@ handlers will get the result as the last arg of their event-v. Here is an
 example written as another effect handler to put the result into db.
 
 ```clj
-(def-event
+(reg-event
   :good-http-result
   (fn [db [_ result]
     (assoc db :api-result result)}))

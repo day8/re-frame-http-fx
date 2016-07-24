@@ -1,7 +1,7 @@
 (ns day8.re-frame.http-fx
   (:require
     [goog.net.ErrorCode :as errors]
-    [re-frame.core      :refer [def-fx dispatch console]]
+    [re-frame.core      :refer [reg-fx dispatch console]]
     [ajax.core          :as ajax]
     [cljs.spec          :as s]))
 
@@ -54,7 +54,7 @@
 
 (s/def ::sequential-or-map (s/or :list-or-vector sequential? :map map?))
 
-(def-fx
+(reg-fx
   :http-xhrio
   (fn http-effect [request]
     (when (= :cljs.spec/invalid (s/conform ::sequential-or-map request))
