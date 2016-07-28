@@ -1,3 +1,3 @@
-##v0.0.1  (2016.07.XX)
+##v0.0.1 & v0.0.4  (2016.07.XX)
 
-Initial code drop
+Initial code drop based on re-frame 0.8.0-alpha7
