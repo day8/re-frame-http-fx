@@ -1,7 +1,3 @@
->
-> Status: freshly minted. Please report issues. 
-> Requires re-frame >= v0.8.0-alpha9
->
 
 [![GitHub license](https://img.shields.io/github/license/Day8/re-frame-http-fx.svg)](license.txt)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
@@ -9,8 +5,9 @@
 
 ## HTTP Effects Handler For re-frame
 
-Herein a re-frame ["Effects Handler"](https://github.com/Day8/re-frame/wiki/Effectful-Event-Handlers),
-keyed `:http-xhrio`, which leverages [cljs-ajax](https://github.com/JulianBirch/cljs-ajax) using the goog xhrio API. Whilst cljs-ajax supports other APIs, this library currently only provides xhrio but others could easily be added e.g. as **:http-xml** or **:http-apache**
+This re-frame library contains an HTTP [Effect Handler](https://github.com/Day8/re-frame/tree/develop/docs). 
+
+Keyed `:http-xhrio`, it wraps the goog xhrio API of [cljs-ajax](https://github.com/JulianBirch/cljs-ajax).
 
 ## Quick Start Guide
 
@@ -18,6 +15,8 @@ keyed `:http-xhrio`, which leverages [cljs-ajax](https://github.com/JulianBirch/
 
 Add the following project dependency: <br>
 [![Clojars Project](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
+
+Requires re-frame >= 0.8.0
 
 ### Step 2. Registration And Use
 
@@ -81,9 +80,10 @@ The result passed to your :on-failure is always a map with various xhrio details
 See the fn [ajax-handler](/src/day8.re-frame.http-fx.cljs) for details
 
 ###TIP:
+
 If you need additional arguments or identifying tokens in your handler, then
 include them in your `:on-success` and `:on-failure` event vector in Step 3. they
 will be passed along. Actual `result` will always be the last value.
 
 TODO:
-- XXX could we introduce the notion of `delay`.  Wait N ms before actioning. To assist with retries?
+- introduce the notion of `delay`.  Wait N ms before actioning. To assist with retries?
