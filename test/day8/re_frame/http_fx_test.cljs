@@ -15,7 +15,7 @@
 (defn teardown! []
   ; cleanup up our handlers
   (doseq [event [::http-test ::good-http-result ::bad-http-result]]
-    (re-frame/clear-event! event)))
+    (re-frame/clear-event event)))
 
 (use-fixtures :each {:after teardown!})
 
@@ -40,7 +40,7 @@
     (async done
 
       ;; setup success handler
-      (re-frame/reg-event
+      (re-frame/reg-event-db
         ::good-http-result
         (fn [db [_ token result]]
           (is (= "test-token1" token) "expected: token passed through")
@@ -52,7 +52,7 @@
           db))
 
       ;; setup failure handler
-      (re-frame/reg-event
+      (re-frame/reg-event-db
         ::bad-http-result
         (fn [db [_ token error]]
           (is (= "test-token1" token) "expected: token passed through")

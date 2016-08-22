@@ -5,7 +5,7 @@
 
 ## HTTP Effects Handler For re-frame
 
-This re-frame library contains an HTTP [Effect Handler](https://github.com/Day8/re-frame/tree/develop/docs). 
+This re-frame library contains an HTTP [Effect Handler](https://github.com/Day8/re-frame/tree/develop/docs).
 
 Keyed `:http-xhrio`, it wraps the goog xhrio API of [cljs-ajax](https://github.com/JulianBirch/cljs-ajax).
 
@@ -70,7 +70,7 @@ handlers will get the result as the last arg of their event-v. Here is an
 example written as another effect handler to put the result into db.
 
 ```clj
-(reg-event
+(reg-event-db
   :good-http-result
   (fn [db [_ result]
     (assoc db :api-result result)}))
