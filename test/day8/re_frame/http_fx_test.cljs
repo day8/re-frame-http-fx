@@ -11,13 +11,15 @@
   (s/keys :req-un [::type ::issues_url ::url ::public_repos])) ;; loose spec
 
 ;; ---- FIXTURES ---------------------------------------------------------------
+;; These will cleanup any dynamically registered handlers from our tests.
+(defn re-frame-fixture
+  [f]
+  (let [restore-re-frame-fn (re-frame/make-restore-fn)]
+    (try
+      (f)
+      (finally (restore-re-frame-fn)))))
 
-(defn teardown! []
-  ; cleanup up our handlers
-  (doseq [event [::http-test ::good-http-result ::bad-http-result]]
-    (re-frame/clear-event event)))
-
-(use-fixtures :each {:after teardown!})
+(use-fixtures :each re-frame-fixture)
 
 ;; ---- TESTS ------------------------------------------------------------------
 
