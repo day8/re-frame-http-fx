@@ -11,15 +11,15 @@
   (s/keys :req-un [::type ::issues_url ::url ::public_repos])) ;; loose spec
 
 ;; ---- FIXTURES ---------------------------------------------------------------
-;; These will cleanup any dynamically registered handlers from our tests.
-(defn re-frame-fixture
-  [f]
-  (let [restore-re-frame-fn (re-frame/make-restore-fn)]
-    (try
-      (f)
-      (finally (restore-re-frame-fn)))))
+;; This fixture uses the re-frame.core/make-restore-fn to checkpoint and reset
+;; to cleanup any dynamically registered handlers from our tests.
+(defn fixture-re-frame
+  []
+  (let [restore-re-frame (atom nil)]
+    {:before #(reset! restore-re-frame (re-frame.core/make-restore-fn))
+     :after  #(@restore-re-frame)}))
 
-(use-fixtures :each re-frame-fixture)
+(use-fixtures :each (fixture-re-frame))
 
 ;; ---- TESTS ------------------------------------------------------------------
 
