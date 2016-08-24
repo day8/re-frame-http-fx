@@ -6,9 +6,15 @@
     [re-frame.core :as re-frame]
     [day8.re-frame.http-fx]))
 
-;;
-(s/def ::api-result
-  (s/keys :req-un [::type ::issues_url ::url ::public_repos])) ;; loose spec
+;; Spec as per https://developer.github.com/v3/rate_limit/
+(s/def ::limit int?)
+(s/def ::remaining int?)
+(s/def ::reset int?)
+(s/def ::resource   (s/keys :req-un [::limit ::remaining ::reset]))
+(s/def ::core ::resource )
+(s/def ::search ::resource )
+(s/def ::resources  (s/keys :req-un [::core ::search]))
+(s/def ::api-result (s/keys :req-un [::resources]))
 
 ;; ---- FIXTURES ---------------------------------------------------------------
 ;; This fixture uses the re-frame.core/make-restore-fn to checkpoint and reset
@@ -34,7 +40,7 @@
     ::http-test
     (fn [_world _event-v]
       {:http-xhrio {:method          :get
-                    :uri             "https://api.github.com/orgs/day8"
+                    :uri             "https://api.github.com/rate_limit"
                     :timeout         5000
                     :response-format (ajax/json-response-format {:keywords? true})
                     :on-success      [::good-http-result "test-token1"]
