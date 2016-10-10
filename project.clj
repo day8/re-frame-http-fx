@@ -1,4 +1,4 @@
-(defproject day8.re-frame/http-fx "0.0.5-SNAPSHOT"
+(defproject day8.re-frame/http-fx "0.1.0-SNAPSHOT"
   :description  "A re-frame effects handler for performing Ajax tasks"
   :url          "https://github.com/Day8/re-frame-http-fx.git"
   :license      {:name "MIT"}
@@ -61,4 +61,5 @@
 
   :aliases {"test-once"   ["do" "clean," "cljsbuild" "once" "test," "shell" "open" "test/test.html"]
             "test-auto"   ["do" "clean," "cljsbuild" "auto" "test,"]
-            "karma-once"  ["do" "clean," "cljsbuild" "once" "karma,"]})
+            "karma-once"  ["do" "clean," "cljsbuild" "once" "karma,"]
+            "karma-auto"  ["do" "clean," "cljsbuild" "auto"]})
