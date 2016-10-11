@@ -1,3 +1,7 @@
+## v0.1.1 (2016-10-11)
+
+* Bump CLJS dependency to 1.9.229 to support the newer spec definition of `coll-of`. [#5](https://github.com/Day8/re-frame-http-fx/issues/5)
+
 ## v0.1.0 (2016-10-10)
 
 * Added a spec to enforce that people provide a response format that is not a keyword. [#2](https://github.com/Day8/re-frame-http-fx/issues/2)
