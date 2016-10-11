@@ -60,7 +60,7 @@
 (s/def ::on-failure vector)
 
 (s/def ::request-map (s/keys :req-un [::method ::uri ::response-format ::on-success ::on-failure]))
-(s/def ::sequential-or-map (s/or :request-map ::request-map :seq-request-maps (s/coll-of ::request-map [])))
+(s/def ::sequential-or-map (s/or :request-map ::request-map :seq-request-maps (s/coll-of ::request-map)))
 
 (reg-fx
   :http-xhrio
