@@ -87,6 +87,3 @@ See the fn [ajax-handler](/src/day8.re-frame.http-fx.cljs) for details
 If you need additional arguments or identifying tokens in your handler, then
 include them in your `:on-success` and `:on-failure` event vector in Step 3. they
 will be passed along. Actual `result` will always be the last value.
-
-TODO:
-- introduce the notion of `delay`.  Wait N ms before actioning. To assist with retries?
