@@ -35,6 +35,23 @@
     (done)
     db))
 
+(re-frame/reg-event-db
+  ::good-post-result
+  (fn [db [_ done data result]]
+    ;; httpbin returns a JSON object containing headers and other
+    ;; metadata from our request along with our JSON payload.
+    (is (= (:json result) data))
+    (done)
+    db))
+
+(re-frame/reg-event-db
+  ::good-post-body-result
+  (fn [db [_ done {:strs [form] :as result}]]
+    (is (= (get form "username") "bob"))
+    (is (= (get form "password") "sekrit"))
+    (done)
+    db))
+
 ;; setup failure handler
 (re-frame/reg-event-db
   ::bad-http-result
@@ -53,7 +70,7 @@
   (fn [_world [_ val]]
     {:http-xhrio val}))
 
-(deftest xhrio-get
+(deftest xhrio-get-test
   ;; Setup effects handler with :http-xhrio specifying an ajax-request.
   ;; Note we specify optional :response-format to make sure our json result
   ;; has keywords for keys, and :timeout see the ajax-request API
@@ -61,7 +78,6 @@
   ;; We specify an :on-failure for completeness but we don't expect the request
   ;; to fail unless there is something wrong with your internet or github.
   (async done
-    ;; kick off main handler
     (re-frame/dispatch [::http-test {:method          :get
                                      :uri             "https://api.github.com/orgs/day8"
                                      :timeout         5000
@@ -69,7 +85,33 @@
                                      :on-success      [::good-http-result done "test-token1"]
                                      :on-failure      [::bad-http-result done "test-token1"]}])))
 
-(deftest xhrio-get-seq
+
+(deftest xhrio-post-params-test
+  (async done
+    (let [data {:here ["is" "a" "map"]}]
+      (re-frame/dispatch [::http-test {:method          :post
+                                       :uri             "https://httpbin.org/post"
+                                       :params          data
+                                       :timeout         5000
+                                       :format          (ajax/json-request-format)
+                                       :response-format (ajax/json-response-format {:keywords? true})
+                                       :on-success      [::good-post-result done data]
+                                       :on-failure      [::bad-http-result done "test-token1"]}]))))
+
+(deftest xhrio-post-body-test
+  (async done
+    (re-frame/dispatch [::http-test {:method          :post
+                                     :uri             "https://httpbin.org/post"
+                                     :body            (doto (js/FormData.)
+                                                        (.append "username" "bob")
+                                                        (.append "password" "sekrit"))
+                                     :timeout         5000
+                                     :format          (ajax/json-request-format)
+                                     :response-format (ajax/json-response-format)
+                                     :on-success      [::good-post-body-result done]
+                                     :on-failure      [::bad-http-result done "test-token1"]}])))
+
+(deftest xhrio-get-seq-test
   ;; Setup effects handler with :http-xhrio specifying an ajax-request.
   ;; Note we specify optional :response-format to make sure our json result
   ;; has keywords for keys, and :timeout see the ajax-request API
@@ -77,7 +119,6 @@
   ;; We specify an :on-failure for completeness but we don't expect the request
   ;; to fail unless there is something wrong with your internet or github.
   (async done
-    ;; kick off main handler
     (re-frame/dispatch [::http-test [{:method          :get
                                       :uri             "https://api.github.com/orgs/day8"
                                       :timeout         5000
@@ -85,7 +126,7 @@
                                       :on-success      [::good-http-result done "test-token1"]
                                       :on-failure      [::bad-http-result done "test-token1"]}]])))
 
-(deftest invalid-fx
+(deftest invalid-fx-test
   (is (= ::s/invalid
          (s/conform ::http-fx/request-map {})))
   (is (= ::s/invalid

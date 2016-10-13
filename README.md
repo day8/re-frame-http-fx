@@ -53,9 +53,26 @@ to everything that follows.
 Look at the `:http-xhrio` line above. This library defines the "effects handler"
 which implements `:http-xhrio`.
 
-The supplied value should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request). Except for `:on-success` and `:on-failure`.
+The supplied value should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request). Except for `:on-success` and `:on-failure`. All options supported by `ajax-request`
+should be supported by this library, as it is a thin wrapper over `ajax-request`.
 
-**N.B.**: `ajax-request` is more powerful than the `GET` and `POST` functions
+Here is an example of a POST request. Note that `:request-format` also needs to be specified.
+
+```cljs
+(re-frame/reg-event-fx
+  ::http-post
+  (fn [_world [_ val]]
+    {:http-xhrio {:method          :post
+                  :uri             "https://httpbin.org/post"
+                  :params          data
+                  :timeout         5000
+                  :format          (ajax/json-request-format)
+                  :response-format (ajax/json-response-format {:keywords? true})
+                  :on-success      [::good-post-result]
+                  :on-failure      [::bad-post-result]}}))
+```
+
+**N.B.**: `ajax-request` is harder to use than the `GET` and `POST` functions
  cljs-ajax provides, but this gives you smaller code sizes from dead code elimination.
  **In particular, you MUST provide a `:response-format`, it is not inferred for you.**
 
@@ -68,7 +85,7 @@ You can also pass a list or vector of these options maps where multiple HTTPs ar
 
 ###Step 3. Handlers for :on-success and :on-failure
 
-Provide normal re-frame handlers for :on-success and :on-failure. You event
+Provide normal re-frame handlers for :on-success and :on-failure. Your event
 handlers will get the result as the last arg of their event-v. Here is an
 example written as another effect handler to put the result into db.
 
