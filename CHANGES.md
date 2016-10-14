@@ -1,3 +1,8 @@
+## v0.1.2 (2016-10-14)
+
+* Add examples for making POST requests
+* Comment out spec until it has a stable release
+
 ## v0.1.1 (2016-10-11)
 
 * Bump CLJS dependency to 1.9.229 to support the newer spec definition of `coll-of`. [#5](https://github.com/Day8/re-frame-http-fx/issues/5)
