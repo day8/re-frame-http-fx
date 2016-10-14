@@ -62,4 +62,4 @@
   :aliases {"test-once"   ["do" "clean," "cljsbuild" "once" "test," "shell" "open" "test/test.html"]
             "test-auto"   ["do" "clean," "cljsbuild" "auto" "test,"]
             "karma-once"  ["do" "clean," "cljsbuild" "once" "karma,"]
-            "karma-auto"  ["do" "clean," "cljsbuild" "auto"]})
+            "karma-auto"  ["do" "clean," "cljsbuild" "auto" "karma,"]})

@@ -3,8 +3,7 @@
     [goog.net.ErrorCode :as errors]
     [re-frame.core :refer [reg-fx dispatch console]]
     [ajax.core :as ajax]
-    [cljs.spec :as s]
-    [cljs.pprint :as pprint]))
+    #_[cljs.spec :as s]))
 
 ;; I provide the :http-xhrio effect handler leveraging cljs-ajax lib
 ;; see API docs https://github.com/JulianBirch/cljs-ajax
@@ -53,22 +52,37 @@
                           api))
       (dissoc :on-success :on-failure))))
 
-(s/def ::method keyword?)
-(s/def ::uri string?)
-(s/def ::response-format (s/keys :req-un [::description ::read ::content-type]))
-(s/def ::on-success vector)
-(s/def ::on-failure vector)
-
-(s/def ::request-map (s/keys :req-un [::method ::uri ::response-format ::on-success ::on-failure]))
-(s/def ::sequential-or-map (s/or :request-map ::request-map :seq-request-maps (s/coll-of ::request-map)))
+;; Specs commented out until ClojureScript has a stable release of spec.
+;
+;(s/def ::method keyword?)
+;(s/def ::uri string?)
+;(s/def ::response-format (s/keys :req-un [::description ::read ::content-type]))
+;(s/def ::format (s/keys :req-un [::write ::content-type]))
+;(s/def ::timeout nat-int?)
+;(s/def ::params any?)
+;(s/def ::headers map?)
+;(s/def ::with-credentials boolean?)
+;
+;(s/def ::on-success vector)
+;(s/def ::on-failure vector)
+;
+;(s/def ::request-map (s/and (s/keys :req-un [::method ::uri ::response-format ::on-success ::on-failure]
+;                                    :opt-un [::format ::timeout ::params ::headers ::with-credentials])
+;                            (fn [m] (if (contains? m :params)
+;                                      (contains? m :format)
+;                                      true))))
+;
+;(s/def ::sequential-or-map (s/or :request-map ::request-map :seq-request-maps (s/coll-of ::request-map
+;                                                                                         :kind sequential?
+;                                                                                         :into [])))
 
 (reg-fx
   :http-xhrio
   (fn http-effect [request]
-    (when (= :cljs.spec/invalid (s/conform ::sequential-or-map request))
-      (throw (ex-info "Invalid " (s/explain-str ::sequential-or-map request))))
-    ;;TODO verify detail request(s) using spec for ajax-request api
-    (let [[conform-val v] (s/conform ::sequential-or-map request)
-          seq-request-maps (if (= :seq-request-maps conform-val) v [v])]
+    #_(when-not (s/valid? ::sequential-or-map request)
+      (throw (ex-info "http-xhrio fx: spec error" (s/explain-data ::sequential-or-map request))))
+    (let [#_ #_ [conform-val v] (s/conform ::sequential-or-map request)
+          #_ #_ seq-request-maps (if (= :seq-request-maps conform-val) v [v])
+          seq-request-maps (if (sequential? request) request [request])]
       (doseq [request seq-request-maps]
         (-> request request->xhrio-options ajax/ajax-request)))))
