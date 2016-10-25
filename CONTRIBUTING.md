@@ -11,7 +11,7 @@ the [ClojureScript mailing list](https://groups.google.com/forum/#!forum/clojure
 
 ## Pull requests
 
-**Create pull requests to the develop branch**, work will be merged onto master when it is ready to be released.
+Create pull requests to the master branch.
 
 ## Running tests
 
@@ -26,8 +26,8 @@ You can also get auto compiles via:
 ```sh
 lein test-auto
 ```
-but you'll need to manually open `test/test.html` in a browser. And you'll also need to 
-manually reload this page after each auto compile. 
+but you'll need to manually open `test/test.html` in a browser. And you'll also need to
+manually reload this page after each auto compile.
 
 #### Via Karma
 
