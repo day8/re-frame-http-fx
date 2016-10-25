@@ -72,7 +72,7 @@ example written as another effect handler to put the result into db.
 ```clj
 (reg-event-db
   :good-http-result
-  (fn [db [_ result]
+  (fn [db [_ result]]
     (assoc db :api-result result)}))
 ```
 
