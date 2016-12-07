@@ -1,4 +1,4 @@
-(defproject day8.re-frame/http-fx "0.1.3"
+(defproject day8.re-frame/http-fx "0.1.4-SNAPSHOT"
   :description  "A re-frame effects handler for performing Ajax tasks"
   :url          "https://github.com/Day8/re-frame-http-fx.git"
   :license      {:name "MIT"}
