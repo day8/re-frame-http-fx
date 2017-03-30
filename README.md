@@ -85,7 +85,7 @@ Don't provide:
 
 You can also pass a list or vector of these options maps where multiple HTTPs are required.
 
-###Step 3. Handlers for :on-success and :on-failure
+### Step 3. Handlers for :on-success and :on-failure
 
 Provide normal re-frame handlers for :on-success and :on-failure. Your event
 handlers will get the result as the last arg of their event-v. Here is an
@@ -101,7 +101,7 @@ example written as another effect handler to put the result into db.
 The result passed to your :on-failure is always a map with various xhrio details provided.
 See the fn [ajax-handler](/src/day8.re-frame.http-fx.cljs) for details
 
-###TIP:
+### TIP:
 
 If you need additional arguments or identifying tokens in your handler, then
 include them in your `:on-success` and `:on-failure` event vector in Step 3. they
