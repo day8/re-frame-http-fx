@@ -99,7 +99,7 @@ example written as another effect handler to put the result into db.
 ```
 
 The result passed to your :on-failure is always a map with various xhrio details provided.
-See the fn [ajax-handler](/src/day8.re-frame.http-fx.cljs) for details
+See the fn [ajax-xhrio-handler](/src/day8/re_frame/http_fx.cljs#L23) for details
 
 ###TIP:
 
