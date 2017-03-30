@@ -95,7 +95,7 @@ example written as another effect handler to put the result into db.
 (reg-event-db
   :good-http-result
   (fn [db [_ result]]
-    (assoc db :api-result result)}))
+    (assoc db :api-result result)))
 ```
 
 The result passed to your :on-failure is always a map with various xhrio details provided.
