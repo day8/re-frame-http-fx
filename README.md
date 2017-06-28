@@ -9,7 +9,7 @@ This re-frame library contains an HTTP [Effect Handler](https://github.com/Day8/
 
 Keyed `:http-xhrio`, it wraps the goog xhrio API of [cljs-ajax](https://github.com/JulianBirch/cljs-ajax).
 
-### WARNING: This effect handler depends entirely on the API of [cljs-ajax](https://github.com/JulianBirch/cljs-ajax). Make sure you are familiar with the API for cljs-ajax, and especially with `ajax-call` before proceeding.
+### WARNING: This effect handler depends entirely on the API of [cljs-ajax](https://github.com/JulianBirch/cljs-ajax). Make sure you are familiar with the API for cljs-ajax, and especially with [`ajax-request`](https://github.com/JulianBirch/cljs-ajax#ajax-request) before proceeding.
 
 ## Quick Start Guide
 
