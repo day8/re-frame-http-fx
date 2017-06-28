@@ -76,7 +76,7 @@ Here is an example of a POST request. Note that `:request-format` also needs to 
 
 **N.B.**: `ajax-request` is harder to use than the `GET` and `POST` functions
  cljs-ajax provides, but this gives you smaller code sizes from dead code elimination.
- **In particular, you MUST provide a `:response-format`, it is not inferred for you.**
+ **In particular, you MUST provide a `:response-format`, (and `:format` if you are sending a body) it is not inferred for you.**
 
 Don't provide:
 
