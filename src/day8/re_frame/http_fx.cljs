@@ -76,13 +76,14 @@
 ;                                                                                         :kind sequential?
 ;                                                                                         :into [])))
 
-(reg-fx
-  :http-xhrio
-  (fn http-effect [request]
-    #_(when-not (s/valid? ::sequential-or-map request)
+(defn http-effect
+  [request]
+  #_(when-not (s/valid? ::sequential-or-map request)
       (throw (ex-info "http-xhrio fx: spec error" (s/explain-data ::sequential-or-map request))))
-    (let [#_ #_ [conform-val v] (s/conform ::sequential-or-map request)
-          #_ #_ seq-request-maps (if (= :seq-request-maps conform-val) v [v])
-          seq-request-maps (if (sequential? request) request [request])]
-      (doseq [request seq-request-maps]
-        (-> request request->xhrio-options ajax/ajax-request)))))
+  (let [#_ #_ [conform-val v] (s/conform ::sequential-or-map request)
+        #_ #_ seq-request-maps (if (= :seq-request-maps conform-val) v [v])
+        seq-request-maps (if (sequential? request) request [request])]
+    (doseq [request seq-request-maps]
+      (-> request request->xhrio-options ajax/ajax-request))))
+
+(reg-fx :http-xhrio http-effect)
