@@ -1,3 +1,12 @@
+## v0.1.4 (2017-06-30)
+
+* Move the http-effect into an accessible function.
+* Small docs improvements
+
+## v0.1.3 (2016-12-07)
+
+* Add missing bracket in handler example
+
 ## v0.1.2 (2016-10-14)
 
 * Add examples for making POST requests
