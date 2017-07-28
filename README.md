@@ -58,7 +58,7 @@ which implements `:http-xhrio`.
 The supplied value should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request). Except for `:on-success` and `:on-failure`. All options supported by `ajax-request`
 should be supported by this library, as it is a thin wrapper over `ajax-request`.
 
-Here is an example of a POST request. Note that `:request-format` also needs to be specified.
+Here is an example of a POST request. Note that `:format` also needs to be specified.
 
 ```cljs
 (re-frame/reg-event-fx
@@ -87,7 +87,7 @@ You can also pass a list or vector of these options maps where multiple HTTPs ar
 
 ### Step 3. Handlers for :on-success and :on-failure
 
-Provide normal re-frame handlers for :on-success and :on-failure. Your event
+Provide normal re-frame handlers for `:on-success` and `:on-failure`. Your event
 handlers will get the result as the last arg of their event-v. Here is an
 example written as another effect handler to put the result into db.
 

@@ -14,7 +14,7 @@
 ;; :on-success    - event vector dispatched with result
 ;; :on-failure    - event vector dispatched with result
 ;;
-;; NOTE: if you nee tokens or other values for your handlers,
+;; NOTE: if you need tokens or other values for your handlers,
 ;;       provide them in the on-success and on-failure event e.g.
 ;;       [:success-event "my-token"] your handler will get event-v
 ;;       [:success-event "my-token" result]
