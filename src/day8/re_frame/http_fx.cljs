@@ -43,14 +43,14 @@
            on-failure      [:http-no-on-failure]}}]
   ; wrap events in cljs-ajax callback
   (let [api (new js/goog.net.XhrIo)]
-  (-> request
-      (assoc
-        :api     api
-        :handler (partial ajax-xhrio-handler
-                          #(dispatch (conj on-success %))
-                          #(dispatch (conj on-failure %))
-                          api))
-      (dissoc :on-success :on-failure))))
+    (-> request
+        (assoc
+          :api     api
+          :handler (partial ajax-xhrio-handler
+                            #(dispatch (conj on-success %))
+                            #(dispatch (conj on-failure %))
+                            api))
+        (dissoc :on-success :on-failure))))
 
 ;; Specs commented out until ClojureScript has a stable release of spec.
 ;
