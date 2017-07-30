@@ -14,7 +14,7 @@
 ;; :on-success    - event vector dispatched with result
 ;; :on-failure    - event vector dispatched with result
 ;;
-;; NOTE: if you nee tokens or other values for your handlers,
+;; NOTE: if you need tokens or other values for your handlers,
 ;;       provide them in the on-success and on-failure event e.g.
 ;;       [:success-event "my-token"] your handler will get event-v
 ;;       [:success-event "my-token" result]
@@ -43,14 +43,14 @@
            on-failure      [:http-no-on-failure]}}]
   ; wrap events in cljs-ajax callback
   (let [api (new js/goog.net.XhrIo)]
-  (-> request
-      (assoc
-        :api     api
-        :handler (partial ajax-xhrio-handler
-                          #(dispatch (conj on-success %))
-                          #(dispatch (conj on-failure %))
-                          api))
-      (dissoc :on-success :on-failure))))
+    (-> request
+        (assoc
+          :api     api
+          :handler (partial ajax-xhrio-handler
+                            #(dispatch (conj on-success %))
+                            #(dispatch (conj on-failure %))
+                            api))
+        (dissoc :on-success :on-failure))))
 
 ;; Specs commented out until ClojureScript has a stable release of spec.
 ;
