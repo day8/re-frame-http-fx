@@ -72,6 +72,15 @@
     (done)
     db))
 
+;; setup request handler
+(re-frame/reg-event-db
+ ::on-http-request
+ (fn [db [_ id req]]
+   (is (= (type req) goog.net.XhrIo) "expected: request passed through")
+   (is (= id "my-id") "expected: id passed through")
+   (done)
+   db))
+
 (re-frame/reg-event-fx
   ::http-test
   (fn [_world [_ val]]
@@ -89,6 +98,7 @@
                                      :uri             "https://api.github.com/rate_limit"
                                      :timeout         5000
                                      :response-format (ajax/json-response-format {:keywords? true})
+                                     :on-request      [::on-http-request "my-id"]
                                      :on-success      [::good-http-result done "test-token1"]
                                      :on-failure      [::bad-http-result done "test-token1"]}])))
 
