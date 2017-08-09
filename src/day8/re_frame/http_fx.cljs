@@ -14,9 +14,10 @@
 ;; :handler       - not supported, see :on-success and :on-failure
 ;; :on-success    - event vector dispatched with result
 ;; :on-failure    - event vector dispatched with result
+;; :on-request    - event vector dispatched with raw xhrio object
 ;;
 ;; NOTE: if you need tokens or other values for your handlers,
-;;       provide them in the on-success and on-failure event e.g.
+;;       provide them in the on-success, on-failure & on-request events e.g.
 ;;       [:success-event "my-token"] your handler will get event-v
 ;;       [:success-event "my-token" result]
 
@@ -51,7 +52,11 @@
                             #(dispatch (conj on-success %))
                             #(dispatch (conj on-failure %))
                             api))
-        (dissoc :on-success :on-failure))))
+        (dissoc :on-success :on-failure :on-request))))
+
+(defn dispatch-on-request [request xhrio]
+  (if-let [on-request (:on-request request)]
+    (dispatch (conj on-request xhrio))))
 
 ;; Specs commented out until ClojureScript has a stable release of spec.
 ;
@@ -66,8 +71,9 @@
 ;
 ;(s/def ::on-success vector?)
 ;(s/def ::on-failure vector?)
+;(s/def ::on-request vector?)
 ;
-;(s/def ::request-map (s/and (s/keys :req-un [::method ::uri ::response-format ::on-success ::on-failure]
+;(s/def ::request-map (s/and (s/keys :req-un [::method ::uri ::response-format ::on-success ::on-failure ::on-request]
 ;                                    :opt-un [::format ::timeout ::params ::headers ::with-credentials])
 ;                            (fn [m] (if (contains? m :params)
 ;                                      (contains? m :format)
@@ -85,6 +91,7 @@
         #_ #_ seq-request-maps (if (= :seq-request-maps conform-val) v [v])
         seq-request-maps (if (sequential? request) request [request])]
     (doseq [request seq-request-maps]
-      (-> request request->xhrio-options ajax/ajax-request))))
+      (let [xhrio (-> request request->xhrio-options ajax/ajax-request)]
+        (dispatch-on-request request xhrio)))))
 
 (reg-fx :http-xhrio http-effect)
