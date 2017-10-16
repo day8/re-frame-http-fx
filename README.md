@@ -58,7 +58,8 @@ which implements `:http-xhrio`.
 The supplied value should be an options map as defined by the simple interface `ajax-request` [see: api docs](https://github.com/JulianBirch/cljs-ajax#ajax-request). Except for `:on-success` and `:on-failure`. All options supported by `ajax-request`
 should be supported by this library, as it is a thin wrapper over `ajax-request`.
 
-Here is an example of a POST request. Note that `:format` also needs to be specified.
+Here is an example of a POST request. Note that `:format` also needs to be specified (unless you pass `:body` in the 
+map).
 
 ```cljs
 (re-frame/reg-event-fx
@@ -76,7 +77,7 @@ Here is an example of a POST request. Note that `:format` also needs to be speci
 
 **N.B.**: `ajax-request` is harder to use than the `GET` and `POST` functions
  cljs-ajax provides, but this gives you smaller code sizes from dead code elimination.
- **In particular, you MUST provide a `:response-format`, (and `:format` if you are sending a body) it is not inferred for you.**
+ **In particular, you MUST provide a `:response-format`, it is not inferred for you.**
 
 Don't provide:
 

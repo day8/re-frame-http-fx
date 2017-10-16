@@ -112,7 +112,6 @@
                                                         (.append "username" "bob")
                                                         (.append "password" "sekrit"))
                                      :timeout         5000
-                                     :format          (ajax/json-request-format)
                                      :response-format (ajax/json-response-format)
                                      :on-success      [::good-post-body-result done]
                                      :on-failure      [::bad-http-result done "test-token1"]}])))
