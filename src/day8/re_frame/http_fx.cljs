@@ -63,8 +63,8 @@
 ;(s/def ::headers map?)
 ;(s/def ::with-credentials boolean?)
 ;
-;(s/def ::on-success vector)
-;(s/def ::on-failure vector)
+;(s/def ::on-success vector?)
+;(s/def ::on-failure vector?)
 ;
 ;(s/def ::request-map (s/and (s/keys :req-un [::method ::uri ::response-format ::on-success ::on-failure]
 ;                                    :opt-un [::format ::timeout ::params ::headers ::with-credentials])
