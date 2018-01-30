@@ -1,7 +1,6 @@
 
 [![GitHub license](https://img.shields.io/github/license/Day8/re-frame-http-fx.svg)](license.txt)
 [![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
-[![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/develop)
 
 ## HTTP Effects Handler For re-frame
 
