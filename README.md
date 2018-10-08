@@ -94,7 +94,7 @@ To make **multiple requests**, supply a vector of options maps:
 ### Step 3. Handlers for :on-success and :on-failure
 
 Provide normal re-frame handlers for `:on-success` and `:on-failure`. Your event
-handlers will get the result as the last arg of their event-v. Here is an
+handlers will get the result as the last argument of their event vector. Here is an
 example written as another effect handler to put the result into db.
 
 ```clj
