@@ -2,7 +2,8 @@
   (:require
     [goog.net.ErrorCode :as errors]
     [re-frame.core :refer [reg-fx dispatch console]]
-    [ajax.core :as ajax]
+    [ajax.simple :as ajax]
+    [ajax.xhrio]
     #_[cljs.spec :as s]))
 
 ;; I provide the :http-xhrio effect handler leveraging cljs-ajax lib
