@@ -39,10 +39,10 @@ to everything that follows.
 
 **Second**, write a an event handler which uses this effect:
 ```clj
-(ns app.events              ;; or whever you define your event handlers
+(ns app.events              ;; or where ever you define your event handlers
   (:require
     ...
-    [ajax.core :as ajax]    ;; so you can use this in the response-format below 
+    [ajax.core :as ajax]    ;; so you can use this in the response-format below
     ...))
     
 (reg-event-fx                             ;; note the trailing -fx
