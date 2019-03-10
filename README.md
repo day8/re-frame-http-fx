@@ -29,7 +29,6 @@ In the namespace where you register your event handlers, perhaps called `events.
   (:require
     ...
     [day8.re-frame.http-fx]   ;; <-- add this
-    [ajax.core :as ajax]      ;; you'll probably also need this
     ...))
 ```
 
@@ -40,6 +39,12 @@ to everything that follows.
 
 **Second**, write a an event handler which uses this effect:
 ```clj
+(ns app.events              ;; or whever you define your event handlers
+  (:require
+    ...
+    [ajax.core :as ajax]    ;; so you can use this in the response-format below 
+    ...))
+    
 (reg-event-fx                             ;; note the trailing -fx
   :handler-with-http                      ;; usage:  (dispatch [:handler-with-http])
   (fn [{:keys [db]} _]                    ;; the first param will be "world"
