@@ -29,6 +29,7 @@ In the namespace where you register your event handlers, perhaps called `events.
   (:require
     ...
     [day8.re-frame.http-fx]   ;; <-- add this
+    [ajax.core :as ajax]      ;; you'll probably also need this
     ...))
 ```
 
