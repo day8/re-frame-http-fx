@@ -76,8 +76,8 @@ map).
                   :timeout         5000
                   :format          (ajax/json-request-format)
                   :response-format (ajax/json-response-format {:keywords? true})
-                  :on-success      [::good-post-result]
-                  :on-failure      [::bad-post-result]}}))
+                  :on-success      [::success-post-result]
+                  :on-failure      [::failure-post-result]}}))
 ```
 
 **N.B.**: `ajax-request` is harder to use than the `GET` and `POST` functions
@@ -103,15 +103,80 @@ Provide normal re-frame handlers for `:on-success` and `:on-failure`. Your event
 handlers will get the result as the last argument of their event vector. Here is an
 example written as another effect handler to put the result into db.
 
-```clj
+```clojure
 (reg-event-db
-  :good-http-result
+  ::success-http-result
   (fn [db [_ result]]
-    (assoc db :api-result result)))
+    (assoc db :success-http-result result)))
 ```
 
 The result passed to your :on-failure is always a map with various xhrio details provided.
 See the fn [ajax-xhrio-handler](/src/day8/re_frame/http_fx.cljs#L23) for details
+
+#### Step 3.1 :on-failure result
+
+```clojure
+(reg-event-db
+  ::failure-http-result
+  (fn [db [_ result]]
+    (assoc db :failure-http-result result)))
+```
+
+##### Step 3.1.1 :on-failure Server Errors aka statuses 40x/50x
+
+If the network connection to the server is successful, but the server returns an
+error (40x/50x) HTTP status code `result` will be a map like:
+
+```clojure
+{:uri "/error"
+ :last-method "GET"
+ :last-error "Service Unavailable [503]"
+ :last-error-code 6
+ :debug-message "Http response at 400 or 500 level"
+ :status 503
+ :status-text "Service Unavailable"
+ :failure :error
+ :response nil}
+```
+
+##### Step 3.1.2 :on-failure Network Errors aka Status 0
+
+In some cases if the network connection itself is unsuccessful, it is possible
+to get a status code of `0`. For example:
+
+- cross-site scripting whereby access is denied; or
+- requesting a URI that is unreachable (typo, DNS issues, invalid hostname etc); or
+- request is interrupted after being sent (browser refresh or navigates away from the page); or
+- request is otherwise intercepted (check your ad blocker).
+
+In this case `result` will be a map like:
+
+```clojure
+{:uri "http://i-do-not-exist/error"
+ :last-method "GET"
+ :last-error " [0]"
+ :last-error-code 6
+ :debug-message "Http response at 400 or 500 level"
+ :status 0
+ :status-text "Request failed."
+ :failure :failed}
+```
+
+##### Step 3.1.3 :on-failure Network Timeout ata Status -1
+
+If the time for the sever to respond exceeds `:timeout` `result will be a map
+like:
+
+```clojure
+{:uri "/timeout"
+ :last-method "GET"
+ :last-error "Timed out after 1ms, aborting"
+ :last-error-code 8
+ :debug-message "Request timed out"
+ :status -1
+ :status-text "Request timed out."
+ :failure :timeout}
+```
 
 ### TIP:
 
