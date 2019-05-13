@@ -162,9 +162,9 @@ In this case `result` will be a map like:
  :failure :failed}
 ```
 
-##### Step 3.1.3 :on-failure Network Timeout ata Status -1
+##### Step 3.1.3 :on-failure Network Timeout aka Status -1
 
-If the time for the sever to respond exceeds `:timeout` `result will be a map
+If the time for the sever to respond exceeds `:timeout` `result` will be a map
 like:
 
 ```clojure
