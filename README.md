@@ -187,8 +187,7 @@ like:
 ### Tip
 
 If you need additional arguments or identifying tokens in your handler, then
-include them in your `:on-success` and `:on-failure` event vector in Step 3. they
-will be passed along. Actual `result` will always be the last value.
+include them in your `:on-success` and `:on-failure` event vector in Step 3. 
 
 For example ... 
 
@@ -202,4 +201,6 @@ For example ...
                   :on-failure      [::failure-post-result :something :else]}}))
 ```
 
-Notice the way that other values are encoded into the success and failure event vectors. 
+Notice the way that additional values are encoded into the success and failure event vectors. 
+
+These event vectors will be dispatched (`result` is `conj`-ed to the end) making all encoded values AND the `result` available to the handlers. 
