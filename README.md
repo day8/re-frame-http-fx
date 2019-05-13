@@ -97,7 +97,7 @@ To make **multiple requests**, supply a vector of options maps:
                {...}]}
 ```
 
-### Step 3. Handlers for :on-success and :on-failure
+### Step 3a. Handling `:on-success`
 
 Provide normal re-frame handlers for `:on-success` and `:on-failure`. Your event
 handlers will get the result as the last argument of their event vector. Here is an
@@ -110,10 +110,15 @@ example written as another effect handler to put the result into db.
     (assoc db :success-http-result result)))
 ```
 
-The result passed to your :on-failure is always a map with various xhrio details provided.
+
+### Step 3b. Handling `:on-failure`
+
+The `result` supplied to your `:on-failure` handler will be a map containing various xhrio details (details below). 
 See the fn [ajax-xhrio-handler](/src/day8/re_frame/http_fx.cljs#L23) for details
 
 #### Step 3.1 :on-failure result
+
+A simple failure handler could be written this way ...
 
 ```clojure
 (reg-event-db
@@ -122,7 +127,7 @@ See the fn [ajax-xhrio-handler](/src/day8/re_frame/http_fx.cljs#L23) for details
     (assoc db :failure-http-result result)))
 ```
 
-##### Step 3.1.1 :on-failure Server Errors aka statuses 40x/50x
+##### status of 40x/50x
 
 If the network connection to the server is successful, but the server returns an
 error (40x/50x) HTTP status code `result` will be a map like:
@@ -139,9 +144,9 @@ error (40x/50x) HTTP status code `result` will be a map like:
  :response nil}
 ```
 
-##### Step 3.1.2 :on-failure Network Errors aka Status 0
+##### Status 0
 
-In some cases if the network connection itself is unsuccessful, it is possible
+In some cases, if the network connection itself is unsuccessful, it is possible
 to get a status code of `0`. For example:
 
 - cross-site scripting whereby access is denied; or
@@ -162,7 +167,7 @@ In this case `result` will be a map like:
  :failure :failed}
 ```
 
-##### Step 3.1.3 :on-failure Network Timeout aka Status -1
+##### Status -1
 
 If the time for the sever to respond exceeds `:timeout` `result` will be a map
 like:
@@ -183,3 +188,17 @@ like:
 If you need additional arguments or identifying tokens in your handler, then
 include them in your `:on-success` and `:on-failure` event vector in Step 3. they
 will be passed along. Actual `result` will always be the last value.
+
+For example ... 
+
+```cljs
+(re-frame/reg-event-fx
+  ::http-post
+  (fn [_ [_ val]]
+    {:http-xhrio {:method          :post
+                  ...
+                  :on-success      [::success-post-result 42 "other"]
+                  :on-failure      [::failure-post-result :something :else]}}))
+```
+
+Notice the way that other values are encoded into the success and failure event vectors. 
