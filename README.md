@@ -124,6 +124,7 @@ A simple failure handler could be written this way ...
 (reg-event-db
   ::failure-http-result
   (fn [db [_ result]]
+    ;; result is a map containing details of the failure
     (assoc db :failure-http-result result)))
 ```
 
@@ -154,7 +155,7 @@ to get a status code of `0`. For example:
 - request is interrupted after being sent (browser refresh or navigates away from the page); or
 - request is otherwise intercepted (check your ad blocker).
 
-In this case `result` will be a map like:
+In this case, `result` will be something like:
 
 ```clojure
 {:uri "http://i-do-not-exist/error"
@@ -169,7 +170,7 @@ In this case `result` will be a map like:
 
 ##### Status -1
 
-If the time for the sever to respond exceeds `:timeout` `result` will be a map
+If the time for the sever to respond exceeds `:timeout` `result` will be a map something 
 like:
 
 ```clojure
@@ -183,7 +184,7 @@ like:
  :failure :timeout}
 ```
 
-### TIP:
+### Tip
 
 If you need additional arguments or identifying tokens in your handler, then
 include them in your `:on-success` and `:on-failure` event vector in Step 3. they
