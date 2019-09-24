@@ -1,5 +1,6 @@
 ## Unreleased
 
+* Upgrade Clojure to 1.10.1
 * Bump cljs-ajax to 0.7.3
 
 ## v0.1.4 (2017-06-30)
