@@ -2,7 +2,7 @@
   (:require
     [ajax.core     :as ajax]
     [cljs.test     :refer-macros [is deftest async use-fixtures]]
-    [cljs.spec     :as s]
+    [cljs.spec.alpha     :as s]
     [re-frame.core :as re-frame]
     [day8.re-frame.http-fx]))
 

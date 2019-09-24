@@ -1,32 +1,20 @@
 (defproject day8.re-frame/http-fx "0.1.7-SNAPSHOT"
-  :description  "A re-frame effects handler for performing Ajax tasks"
-  :url          "https://github.com/Day8/re-frame-http-fx.git"
-  :license      {:name "MIT"}
-  :dependencies [[org.clojure/clojure        "1.10.1" :scope "provided"]
-                 [org.clojure/clojurescript  "1.10.520" :scope "provided"]
-                 [re-frame                   "0.10.9" :scope "provided"]
-                 [cljs-ajax                  "0.8.0"]]
+  :description "A re-frame effects handler for performing Ajax tasks"
+  :url "https://github.com/Day8/re-frame-http-fx.git"
+  :license {:name "MIT"}
+  :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
+                 [org.clojure/clojurescript "1.10.520" :scope "provided"
+                  :exclusions [com.google.javascript/closure-compiler-unshaded
+                               org.clojure/google-closure-library]]
+                 [thheller/shadow-cljs "2.8.57" :scope "provided"]
+                 [re-frame "0.10.9" :scope "provided"]
+                 [cljs-ajax "0.8.0"]]
 
-  :profiles {:debug {:debug true}
-             :dev   {:dependencies [[karma-reporter     "1.0.1"]
-                                    [binaryage/devtools "0.8.1"]]
-                     :plugins      [[lein-ancient       "0.6.15"]
-                                    [lein-cljsbuild     "1.1.4"]
-                                    [lein-npm           "0.6.2"]
-                                    [lein-shell         "0.5.0"]]}}
+  :plugins [[lein-shadow "0.1.5"]
+            [lein-ancient "0.6.15"]
+            [lein-shell "0.5.0"]]
 
-  :clean-targets  [:target-path "run/compiled"]
-
-  :resource-paths ["run/resources"]
-  :jvm-opts       ["-Xmx1g"]
-  :source-paths   ["src"]
-  :test-paths     ["test"]
-
-  :shell          {:commands {"open" {:windows ["cmd" "/c" "start"]
-                                      :macosx  "open"
-                                      :linux   "xdg-open"}}}
-
-  :deploy-repositories [["releases"  {:sign-releases false :url "https://clojars.org/repo"}]
+  :deploy-repositories [["releases" {:sign-releases false :url "https://clojars.org/repo"}]
                         ["snapshots" {:sign-releases false :url "https://clojars.org/repo"}]]
 
   :release-tasks [["vcs" "assert-committed"]
@@ -38,31 +26,37 @@
                   ["vcs" "commit"]
                   ["vcs" "push"]]
 
-  :npm {:devDependencies [[karma                 "1.0.0"]
-                          [karma-cljs-test       "0.1.0"]
-                          [karma-chrome-launcher "0.2.0"]
-                          [karma-junit-reporter  "0.3.8"]]}
+  :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]]}}
 
-  :cljsbuild {:builds [{:id           "test"
-                        :source-paths ["test" "src"]
-                        :compiler     {:preloads        [devtools.preload]
-                                       :external-config {:devtools/config {:features-to-install [:formatters :hints]}}
-                                       :output-to     "run/compiled/browser/test.js"
-                                       :source-map    true
-                                       :output-dir    "run/compiled/browser/test"
-                                       :optimizations :none
-                                       :source-map-timestamp true
-                                       :pretty-print  true}}
-                       {:id           "karma"
-                        :source-paths ["test" "src"]
-                        :compiler     {:output-to     "run/compiled/karma/test.js"
-                                       :source-map    "run/compiled/karma/test.js.map"
-                                       :output-dir    "run/compiled/karma/test"
-                                       :optimizations :whitespace
-                                       :main          "re_frame_async_flow_fx.test_runner"
-                                       :pretty-print  true}}]}
+  :clean-targets [:target-path
+                  "run/compiled"]
 
-  :aliases {"test-once"   ["do" "clean," "cljsbuild" "once" "test," "shell" "open" "test/test.html"]
-            "test-auto"   ["do" "clean," "cljsbuild" "auto" "test,"]
-            "karma-once"  ["do" "clean," "cljsbuild" "once" "karma,"]
-            "karma-auto"  ["do" "clean," "cljsbuild" "auto" "karma,"]})
+  :jvm-opts ^:replace ["-Xms256m" "-Xmx2g"]
+
+  :source-paths ["src"]
+
+  :test-paths ["test"]
+
+  :resource-paths ["run/resources"]
+
+  :shadow-cljs {:nrepl  {:port 8777}
+
+                :builds {:browser-test
+                         {:target           :browser-test
+                          :ns-regexp        "day8.*-test$"
+                          :test-dir         "run/resources/compiled_test"
+                          :compiler-options {:pretty-print    true
+                                             :external-config {:devtools/config {:features-to-install [:formatters :hints]}}}}
+                         :karma-test
+                         {:target           :karma
+                          :ns-regexp        "day8.*-test$"
+                          :output-to        "target/karma-test.js"
+                          :compiler-options {:pretty-print true}}}}
+
+  :aliases {"test-auto"  ["do"
+                          ["clean"]
+                          ["shadow" "watch" "browser-test"]]
+            "karma-once" ["do"
+                          ["clean"]
+                          ["shadow" "compile" "karma-test"]
+                          ["shell" "karma" "start" "--single-run" "--reporters" "junit,dots"]]})

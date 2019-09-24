@@ -1,5 +1,6 @@
 ## Unreleased
 
+* Migrate to shadow-cljs
 * Upgrade Clojure to 1.10.1
 * Upgrade ClojureScript to 1.10.520
 * Bump cljs-ajax to 0.7.3
