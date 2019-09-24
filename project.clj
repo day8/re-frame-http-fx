@@ -3,14 +3,14 @@
   :url          "https://github.com/Day8/re-frame-http-fx.git"
   :license      {:name "MIT"}
   :dependencies [[org.clojure/clojure        "1.10.1" :scope "provided"]
-                 [org.clojure/clojurescript  "1.9.229"]
+                 [org.clojure/clojurescript  "1.10.520" :scope "provided"]
                  [re-frame                   "0.8.0"]
                  [cljs-ajax                  "0.7.3"]]
 
   :profiles {:debug {:debug true}
              :dev   {:dependencies [[karma-reporter     "1.0.1"]
                                     [binaryage/devtools "0.8.1"]]
-                     :plugins      [[lein-ancient       "0.6.10"]
+                     :plugins      [[lein-ancient       "0.6.15"]
                                     [lein-cljsbuild     "1.1.4"]
                                     [lein-npm           "0.6.2"]
                                     [lein-shell         "0.5.0"]]}}
