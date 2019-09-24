@@ -5,7 +5,7 @@
   :dependencies [[org.clojure/clojure        "1.10.1" :scope "provided"]
                  [org.clojure/clojurescript  "1.10.520" :scope "provided"]
                  [re-frame                   "0.10.9" :scope "provided"]
-                 [cljs-ajax                  "0.7.3"]]
+                 [cljs-ajax                  "0.8.0"]]
 
   :profiles {:debug {:debug true}
              :dev   {:dependencies [[karma-reporter     "1.0.1"]
