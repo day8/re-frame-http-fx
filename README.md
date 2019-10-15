@@ -1,10 +1,10 @@
 
-[![GitHub license](https://img.shields.io/github/license/Day8/re-frame-http-fx.svg)](license.txt)
-[![Circle CI](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/Day8/re-frame-http-fx/tree/master)
+[![GitHub license](https://img.shields.io/github/license/day8/re-frame-http-fx.svg)](license.txt)
+[![Circle CI](https://circleci.com/gh/day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/day8/re-frame-http-fx/tree/master)
 
 ## HTTP Effects Handler For re-frame
 
-This re-frame library contains an HTTP [Effect Handler](https://github.com/Day8/re-frame/tree/develop/docs).
+This re-frame library contains an HTTP [Effect Handler](https://github.com/day8/re-frame/tree/develop/docs).
 
 Keyed `:http-xhrio`, it wraps the goog xhrio API of [cljs-ajax](https://github.com/JulianBirch/cljs-ajax).
 
