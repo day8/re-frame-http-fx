@@ -1,6 +1,7 @@
 
-[![GitHub license](https://img.shields.io/github/license/day8/re-frame-http-fx.svg)](license.txt)
-[![Circle CI](https://circleci.com/gh/day8/re-frame-http-fx/tree/master.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/day8/re-frame-http-fx/tree/master)
+[![clojars](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
+[![license](https://img.shields.io/github/license/day8/re-frame-http-fx.svg)](license.txt)
+[![ci](https://github.com/day8/re-frame-http-fx/workflows/ci/badge.svg)](https://github.com/day8/re-frame-http-fx/actions?workflow=ci)
 
 ## HTTP Effects Handler For re-frame
 
@@ -15,7 +16,7 @@ Keyed `:http-xhrio`, it wraps the goog xhrio API of [cljs-ajax](https://github.c
 ### Step 1. Add Dependency
 
 Add the following project dependency: <br>
-[![Clojars Project](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
+[![clojars](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
 
 Requires re-frame >= 0.8.0
 
