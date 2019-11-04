@@ -1,5 +1,12 @@
 ## Unreleased
 
+#### Fixed
+
+* Fix infer-externs compiler warning. 
+  See [#38](https://github.com/day8/re-frame-http-fx/issues/38).
+
+#### Changed
+
 * Migrate to shadow-cljs
 * Upgrade Clojure to 1.10.1
 * Upgrade ClojureScript to 1.10.520
