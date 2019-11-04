@@ -1,7 +1,9 @@
-
-[![clojars](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
-[![license](https://img.shields.io/github/license/day8/re-frame-http-fx.svg)](license.txt)
-[![ci](https://github.com/day8/re-frame-http-fx/workflows/ci/badge.svg)](https://github.com/day8/re-frame-http-fx/actions?workflow=ci)
+[![CI](https://github.com/day8/re-frame-http-fx/workflows/ci/badge.svg)](https://github.com/day8/re-frame-http-fx/actions?workflow=ci)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/day8/re-frame-http-fx?style=flat)](https://github.com/day8/re-frame-http-fx/tags)
+[![Clojars Project](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
+[![GitHub issues](https://img.shields.io/github/issues-raw/day8/re-frame-http-fx?style=flat)](https://github.com/day8/re-frame-http-fx/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/day8/re-frame-http-fx)](https://github.com/day8/re-frame-http-fx/pulls)
+[![License](https://img.shields.io/github/license/day8/re-frame-http-fx.svg)](LICENSE)
 
 ## HTTP Effects Handler For re-frame
 
