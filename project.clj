@@ -28,10 +28,11 @@
             [lein-ancient               "0.6.15"]
             [lein-shell                 "0.5.0"]]
 
-  :deploy-repositories [["releases" {:sign-releases false :url "https://clojars.org/repo"}]
-                        ["snapshots" {:sign-releases false :url "https://clojars.org/repo"}]]
-
-  :release-tasks [["deploy"]]
+  :deploy-repositories [["clojars" {:sign-releases false
+                                    :url           "https://clojars.org/repo"
+                                    :username      :env/CLOJARS_USERNAME
+                                    :password      :env/CLOJARS_PASSWORD}]]
+  :release-tasks [["deploy" "clojars"]]
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]]}}
 
