@@ -1,5 +1,10 @@
 ## Unreleased
 
+## v0.2.0 (2019-11-04)
+
+Only a minor release mostly just to test releases with GitHub Actions. Do be
+wary of the cljs-ajax version bump due to [breaking changes](https://github.com/JulianBirch/cljs-ajax/blob/master/CHANGES.md#version-08).
+
 #### Fixed
 
 * Fix infer-externs compiler warning. 
