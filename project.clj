@@ -1,7 +1,20 @@
-(defproject day8.re-frame/http-fx "0.1.7-SNAPSHOT"
+(defproject day8.re-frame/http-fx "see :git-version below https://github.com/arrdem/lein-git-version"
   :description "A re-frame effects handler for performing Ajax tasks"
   :url "https://github.com/day8/re-frame-http-fx.git"
   :license {:name "MIT"}
+
+  :git-version
+  {:status-to-version
+   (fn [{:keys [tag version branch ahead ahead? dirty?] :as git}]
+     (assert (re-find #"\d+\.\d+\.\d+" tag)
+       "Tag is assumed to be a raw SemVer version")
+     (if (and tag (not ahead?) (not dirty?))
+       tag
+       (let [[_ prefix patch] (re-find #"(\d+\.\d+)\.(\d+)" tag)
+             patch            (Long/parseLong patch)
+             patch+           (inc patch)]
+         (format "%s.%d-%s-SNAPSHOT" prefix patch+ ahead))))}
+
   :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"
                   :exclusions [com.google.javascript/closure-compiler-unshaded
@@ -10,21 +23,15 @@
                  [re-frame "0.10.9" :scope "provided"]
                  [cljs-ajax "0.8.0"]]
 
-  :plugins [[lein-shadow "0.1.5"]
+  :plugins [[me.arrdem/lein-git-version "2.0.3"]
+            [lein-shadow "0.1.5"]
             [lein-ancient "0.6.15"]
             [lein-shell "0.5.0"]]
 
   :deploy-repositories [["releases" {:sign-releases false :url "https://clojars.org/repo"}]
                         ["snapshots" {:sign-releases false :url "https://clojars.org/repo"}]]
 
-  :release-tasks [["vcs" "assert-committed"]
-                  ["change" "version" "leiningen.release/bump-version" "release"]
-                  ["vcs" "commit"]
-                  ["vcs" "tag" "v" "--no-sign"]
-                  ["deploy"]
-                  ["change" "version" "leiningen.release/bump-version"]
-                  ["vcs" "commit"]
-                  ["vcs" "push"]]
+  :release-tasks [["deploy"]]
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]]}}
 
