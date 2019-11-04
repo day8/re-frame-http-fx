@@ -3,7 +3,8 @@
     [goog.net.ErrorCode :as errors]
     [re-frame.core :refer [reg-fx dispatch console]]
     [ajax.core :as ajax]
-    #_[cljs.spec :as s]))
+    #_[cljs.spec :as s])
+  (:import (goog.net XhrIo)))
 
 ;; I provide the :http-xhrio effect handler leveraging cljs-ajax lib
 ;; see API docs https://github.com/JulianBirch/cljs-ajax
@@ -42,7 +43,7 @@
     :or   {on-success      [:http-no-on-success]
            on-failure      [:http-no-on-failure]}}]
   ; wrap events in cljs-ajax callback
-  (let [api (new js/goog.net.XhrIo)]
+  (let [api (new goog.net.XhrIo)]
     (-> request
         (assoc
           :api     api
