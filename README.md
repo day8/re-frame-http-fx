@@ -1,4 +1,5 @@
 [![CI](https://github.com/day8/re-frame-http-fx/workflows/ci/badge.svg)](https://github.com/day8/re-frame-http-fx/actions?workflow=ci)
+[![CD](https://github.com/day8/re-frame-http-fx/workflows/cd/badge.svg)](https://github.com/day8/re-frame-http-fx/actions?workflow=cd)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/day8/re-frame-http-fx?style=flat)](https://github.com/day8/re-frame-http-fx/tags)
 [![Clojars Project](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
 [![GitHub issues](https://img.shields.io/github/issues-raw/day8/re-frame-http-fx?style=flat)](https://github.com/day8/re-frame-http-fx/issues)
