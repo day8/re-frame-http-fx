@@ -37,9 +37,9 @@ jobs:
       - run: lein karma-once
       - name: Slack notification
         uses: homoluctus/slatify@v2.0.1
-        if: always()
+        if: failure() || cancelled()
         with:
-          type: ${{ job.status  }}
+          type: ${{ job.status }}
           job_name: re-frame-http-fx Tests
           channel: '#oss-robots'
           mention: 'channel'
@@ -70,7 +70,7 @@ jobs:
         uses: homoluctus/slatify@v2.0.1
         if: always()
         with:
-          type: ${{ job.status  }}
+          type: ${{ job.status }}
           job_name: re-frame-http-fx Deployment
           channel: '#oss-robots'
           mention: 'channel'
