@@ -75,7 +75,7 @@
 ;; setup request handler
 (re-frame/reg-event-db
  ::on-http-request
- (fn [db [_ id req]]
+ (fn [db [_ done id req]]
    (is (= (type req) goog.net.XhrIo) "expected: request passed through")
    (is (= id "my-id") "expected: id passed through")
    (done)
