@@ -188,6 +188,35 @@ like:
  :failure :timeout}
 ```
 
+### Optional: Handler for :on-request
+
+If you need access to the raw request, to for example, cancel long running requests or repeated debounced requests,
+you can pass an `:on-request` handler that will be called with the request.
+
+```clojure
+(re-frame/reg-event-fx
+  ::http-post
+  (fn [_world [_ val]]
+    {:http-xhrio {:method          :get
+                  :uri             "https://httpbin.org/delay/60"
+                  :format          (ajax/json-request-format)
+                  :response-format (ajax/json-response-format {:keywords? true})
+                  :on-request      [::track-slow-request "my-request"]
+                  :on-success      [::success-get-result]
+                  :on-failure      [::failure-get-result]}}))
+
+(reg-event-db
+  ::track-slow-request
+  (fn [db [_ my-id xhrio]]
+    (assoc-in db [:requests my-id] xhrio)))
+```
+
+Later if you need to, you could retrieve the request from the app-db and cancel it.
+
+**N.B.**: To prevent memory leaks you need to cleanup the request in both your `:on-success` and `:on-failure` handlers.
+Otherwise the requests will just hang around in your app-db indefinitely.
+ 
+
 ### Tip
 
 If you need additional arguments or identifying tokens in your handler, then
