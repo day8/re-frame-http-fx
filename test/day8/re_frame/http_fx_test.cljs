@@ -98,7 +98,7 @@
                                      :uri             "https://api.github.com/rate_limit"
                                      :timeout         5000
                                      :response-format (ajax/json-response-format {:keywords? true})
-                                     :on-request      [::on-http-request "my-id"]
+                                     :on-request      [::on-http-request done "my-id"]
                                      :on-success      [::good-http-result done "test-token1"]
                                      :on-failure      [::bad-http-result done "test-token1"]}])))
 
