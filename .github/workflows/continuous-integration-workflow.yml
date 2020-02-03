@@ -39,8 +39,6 @@ jobs:
           type: ${{ job.status }}
           job_name: re-frame-http-fx Tests
           channel: '#oss-robots'
-          mention: 'channel'
-          mention_if: 'failure'
           url: ${{ secrets.SLACK_WEBHOOK }}
           commit: true
           token: ${{ secrets.GITHUB_TOKEN }}
