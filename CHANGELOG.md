@@ -3,6 +3,7 @@
 #### Changed
 
 - Upgrade ClojureScript to [1.10.748](https://clojurescript.org/news/2020-04-24-release)
+- Upgrade shadow-cljs to 2.8.109
 
 ## v0.2.0 (2019-11-04)
 
