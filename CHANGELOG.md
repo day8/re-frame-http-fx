@@ -5,6 +5,7 @@
 - Upgrade ClojureScript to [1.10.748](https://clojurescript.org/news/2020-04-24-release)
 - Upgrade shadow-cljs to 2.8.109
 - Upgrade binaryage/devtools to 1.0.0
+- Upgrade re-frame to 0.12.0
 
 ## v0.2.0 (2019-11-04)
 
