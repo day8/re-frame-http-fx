@@ -1,5 +1,9 @@
 ## Unreleased
 
+#### Changed
+
+- Upgrade ClojureScript to [1.10.748](https://clojurescript.org/news/2020-04-24-release)
+
 ## v0.2.0 (2019-11-04)
 
 Only a minor release mostly just to test releases with GitHub Actions. Do be
