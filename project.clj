@@ -24,7 +24,7 @@
                                     :password      :env/CLOJARS_PASSWORD}]]
   :release-tasks [["deploy" "clojars"]]
 
-  :profiles {:dev {:dependencies [[binaryage/devtools "0.9.11"]]}}
+  :profiles {:dev {:dependencies [[binaryage/devtools "1.0.0"]]}}
 
   :clean-targets [:target-path
                   "run/compiled"]
