@@ -21,7 +21,7 @@
   :deploy-repositories [["clojars" {:sign-releases false
                                     :url           "https://clojars.org/repo"
                                     :username      :env/CLOJARS_USERNAME
-                                    :password      :env/CLOJARS_PASSWORD}]]
+                                    :password      :env/CLOJARS_TOKEN}]]
   :release-tasks [["deploy" "clojars"]]
 
   :profiles {:dev {:dependencies [[binaryage/devtools "1.0.0"]]}}
