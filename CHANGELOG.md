@@ -4,7 +4,7 @@
 
 - Upgrade ClojureScript to 1.10.773 
 - Upgrade lein-git-inject to 0.0.14
-- Upgrade shadow-cljs to 2.8.109
+- Upgrade shadow-cljs to 2.10.17
 - Upgrade binaryage/devtools to 1.0.0
 - Upgrade re-frame to 0.12.0
 
