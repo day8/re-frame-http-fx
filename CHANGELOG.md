@@ -6,7 +6,7 @@
 - Upgrade lein-git-inject to 0.0.14
 - Upgrade shadow-cljs to 2.10.17
 - Upgrade binaryage/devtools to 1.0.0
-- Upgrade re-frame to 0.12.0
+- Upgrade re-frame to 1.0.0 
 
 ## v0.2.0 (2019-11-04)
 

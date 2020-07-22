@@ -9,7 +9,7 @@
                                org.clojure/google-closure-library
                                org.clojure/google-closure-library-third-party]]
                  [thheller/shadow-cljs      "2.10.17" :scope "provided"]
-                 [re-frame                  "0.12.0" :scope "provided"]
+                 [re-frame                  "1.0.0" :scope "provided"]
                  [cljs-ajax                 "0.8.0"]]
 
   :plugins      [[day8/lein-git-inject "0.0.14"]
