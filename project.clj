@@ -12,7 +12,7 @@
                  [re-frame                  "0.12.0" :scope "provided"]
                  [cljs-ajax                 "0.8.0"]]
 
-  :plugins      [[day8/lein-git-inject "0.0.11"]
+  :plugins      [[day8/lein-git-inject "0.0.14"]
                  [lein-shadow          "0.2.0"]
                  [lein-shell           "0.5.0"]]
 
