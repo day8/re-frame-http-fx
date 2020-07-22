@@ -2,7 +2,7 @@
 
 #### Changed
 
-- Upgrade ClojureScript to [1.10.748](https://clojurescript.org/news/2020-04-24-release)
+- Upgrade ClojureScript to 1.10.773 
 - Upgrade lein-git-inject to 0.0.14
 - Upgrade shadow-cljs to 2.8.109
 - Upgrade binaryage/devtools to 1.0.0
