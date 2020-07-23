@@ -34,14 +34,7 @@ jobs:
           key: ${{ runner.os }}-shadow-cljs-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-shadow-cljs-
-      # The git update-index command is required to ignore changes to package.json as
-      # 1. package.json must be committed to the repo for npm install --save... to behave correctly, which is used by
-      #    lein-shadow to install dependencies that would cause the build to fail if missing; e.g. karma
-      # 2. .gitignore does nothing for files that are already committed
-      # 3. git recognising package.json modifications would cause day8/lein-git-inject to always incorrectly use
-      #    -SNAPSHOT versions.
       - run: |
-          git update-index --assume-unchanged package.json
           lein karma-once
       - name: Slack notification
         uses: homoluctus/slatify@v2.0.1
@@ -69,15 +62,8 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('project.clj') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      # The git update-index command is required to ignore changes to package.json as
-      # 1. package.json must be committed to the repo for npm install --save... to behave correctly, which is used by
-      #    lein-shadow to install dependencies that would cause the build to fail if missing; e.g. karma
-      # 2. .gitignore does nothing for files that are already committed
-      # 3. git recognising package.json modifications would cause day8/lein-git-inject to always incorrectly use
-      #    -SNAPSHOT versions.
       - name: Run lein release
         run: |
-          git update-index --assume-unchanged package.json
           CLOJARS_USERNAME=${{ secrets.CLOJARS_USERNAME }} CLOJARS_TOKEN=${{ secrets.CLOJARS_TOKEN }} GITHUB_USERNAME=${{ github.actor }} GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} lein release
       # This creates a 'GitHub Release' from the tag and includes link to the CHANGELOG
       # at that point in the Git history. We do not use draft or prerelease features as
