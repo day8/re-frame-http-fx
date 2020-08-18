@@ -60,10 +60,8 @@
   ;;    -SNAPSHOT versions.
   :aliases {"test-auto"  ["do"
                           ["clean"]
-                          ["shell" "git" "update-index" "--assume-unchanged" "package.json"]
                           ["shadow" "watch" "browser-test"]]
             "karma-once" ["do"
                           ["clean"]
-                          ["shell" "git" "update-index" "--assume-unchanged" "package.json"]
                           ["shadow" "compile" "karma-test"]
                           ["shell" "karma" "start" "--single-run" "--reporters" "junit,dots"]]})
