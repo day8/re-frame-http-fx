@@ -10,21 +10,21 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Maven cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: /root/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('project.clj') }}
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: npm cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('project.clj') }}-${{ hashFiles('**/deps.cljs') }}
           restore-keys: |
             ${{ runner.os }}-npm-
       - name: shadow-cljs compiler cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: .shadow-cljs
           key: ${{ runner.os }}-shadow-cljs-${{ github.sha }}
