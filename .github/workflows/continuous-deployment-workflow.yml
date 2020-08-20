@@ -9,7 +9,7 @@ jobs:
     name: Test
     runs-on: ubuntu-18.04
     container:
-      image: day8au/dev-ci:0.0.6
+      image: day8au/dev-ci:0.0.8
     steps:
       - uses: actions/checkout@v1
       - name: Maven cache
@@ -50,7 +50,7 @@ jobs:
     needs: test
     runs-on: ubuntu-18.04
     container:
-      image: day8au/dev-ci:0.0.6
+      image: day8au/dev-ci:0.0.8
     steps:
       - uses: actions/checkout@v1
       - name: Maven cache
