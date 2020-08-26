@@ -31,7 +31,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-shadow-cljs-
       - run: |
-          lein karma-once
+          lein ci
       - name: Slack notification
         uses: homoluctus/slatify@v2.0.1
         if: failure() || cancelled()

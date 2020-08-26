@@ -17,14 +17,9 @@ Create pull requests to the master branch.
 
 #### Via Browser/HTML
 
-To build the tests and run them in one step, just:
+To auto compile the tests via shadow-cljs just:
 ```sh
-lein test-once  # compiles & then opens test.html in the browser
-```
-
-You can also get auto compiles via:
-```sh
-lein test-auto
+lein watch
 ```
 but you'll need to manually open `test/test.html` in a browser. And you'll also need to
 manually reload this page after each auto compile.
@@ -36,8 +31,9 @@ If you're on Linux or Mac OS X then you will be fine, if you're on Windows then 
 Visual Studio Community Edition, and the C++ compiler dependencies.
 
 ```sh
-lein deps       # runs lein-npm, installs Karma & other node dependencies. Only needed the first time.
-lein karma-once # to build re-frame-http-fx tests
+lein ci # to build and run re-frame-http-fx tests
+# or 
+lein watch
 karma start     # to run the tests with an auto watcher
 ```
 

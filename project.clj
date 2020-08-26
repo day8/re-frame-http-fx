@@ -52,16 +52,11 @@
                           :output-to        "target/karma-test.js"
                           :compiler-options {:pretty-print true}}}}
 
-  ;; The git update-index command is required to ignore changes to package.json as
-  ;; 1. package.json must be committed to the repo for npm install --save... to behave correctly, which is used by
-  ;;    lein-shadow to install dependencies that would cause the build to fail if missing; e.g. karma
-  ;; 2. .gitignore does nothing for files that are already committed
-  ;; 3. git recognising package.json modifications would cause day8/lein-git-inject to always incorrectly use
-  ;;    -SNAPSHOT versions.
-  :aliases {"test-auto"  ["do"
-                          ["clean"]
-                          ["shadow" "watch" "browser-test"]]
-            "karma-once" ["do"
-                          ["clean"]
-                          ["shadow" "compile" "karma-test"]
-                          ["shell" "karma" "start" "--single-run" "--reporters" "junit,dots"]]})
+  :aliases {"watch" ["do"
+                     ["clean"]
+                     ["shadow" "watch" "browser-test" "karma-test"]]
+
+            "ci"    ["do"
+                     ["clean"]
+                     ["shadow" "compile" "karma-test"]
+                     ["shell" "karma" "start" "--single-run" "--reporters" "junit,dots"]]})
