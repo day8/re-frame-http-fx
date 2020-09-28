@@ -8,12 +8,12 @@
                   :exclusions [com.google.javascript/closure-compiler-unshaded
                                org.clojure/google-closure-library
                                org.clojure/google-closure-library-third-party]]
-                 [thheller/shadow-cljs      "2.10.19" :scope "provided"]
+                 [thheller/shadow-cljs      "2.11.4" :scope "provided"]
                  [re-frame                  "1.0.0" :scope "provided"]
                  [cljs-ajax                 "0.8.0"]]
 
   :plugins      [[day8/lein-git-inject "0.0.14"]
-                 [lein-shadow          "0.2.2"]
+                 [lein-shadow          "0.3.1"]
                  [lein-shell           "0.5.0"]]
 
   :middleware   [leiningen.git-inject/middleware]
@@ -27,7 +27,7 @@
   :profiles {:dev {:dependencies [[binaryage/devtools "1.0.2"]]}}
 
   :clean-targets [:target-path
-                  "package.json"
+                  "node_modules"
                   "run/compiled"]
 
   :jvm-opts ^:replace ["-Xms256m" "-Xmx2g"]
