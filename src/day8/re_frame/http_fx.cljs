@@ -44,7 +44,7 @@
     :or   {on-success      [:http-no-on-success]
            on-failure      [:http-no-on-failure]}}]
   ; wrap events in cljs-ajax callback
-  (let [api (new goog.net.XhrIo)]
+  (let [api (or (:api request) (new goog.net.XhrIo))]
     (-> request
         (assoc
           :api     api
