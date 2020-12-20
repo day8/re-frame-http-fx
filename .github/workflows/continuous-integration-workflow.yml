@@ -6,7 +6,10 @@ jobs:
     name: Test
     runs-on: ubuntu-18.04
     container:
-      image: day8au/dev-ci:0.0.8
+      image: docker.pkg.github.com/day8/dockerfile-for-dev-ci-image/dev-ci:0.0.13
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ env.GLOBAL_TOKEN_FOR_GITHUB }}
     steps:
       - uses: actions/checkout@v2
       - name: Maven cache
