@@ -40,7 +40,13 @@
 
   :shadow-cljs {:nrepl  {:port 8777}
 
-                :builds {:browser-test
+                :builds {:build-report
+                         {:target           :browser
+                          :compiler-options {:language-in :es6
+                                             :language-out :es6}
+                          :release          {:modules {:http-fx {:entries [day8.re-frame.http-fx]}}}}
+                         
+                         :browser-test
                          {:target           :browser-test
                           :ns-regexp        "day8.*-test$"
                           :test-dir         "run/resources/compiled_test"
@@ -55,6 +61,10 @@
   :aliases {"watch" ["do"
                      ["clean"]
                      ["shadow" "watch" "browser-test" "karma-test"]]
+
+            "build-report" ["do"
+                            ["clean"]
+                            ["shadow" "run" "shadow.cljs.build-report" "build-report" "target/build-report.html"]]
 
             "ci"    ["do"
                      ["clean"]
