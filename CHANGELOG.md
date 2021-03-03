@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v0.2.3 (2021-03-03)
+
 #### Changed
 
 - **Upgrade cljs-ajax to 0.8.1**. Upstream project's CHANGELOG is missing this version, appears to be [these changes](https://github.com/JulianBirch/cljs-ajax/compare/0c2633694332bfed34847e922bd206ca0090957b...af16a67982320af360c90a0dd48228d4eaf1f3ab) since 0.8.0.
