@@ -2,6 +2,16 @@
 
 #### Changed
 
+- **Upgrade cljs-ajax to 0.8.1**. Upstream project's CHANGELOG is missing this version, appears to be [these changes](https://github.com/JulianBirch/cljs-ajax/compare/0c2633694332bfed34847e922bd206ca0090957b...af16a67982320af360c90a0dd48228d4eaf1f3ab) since 0.8.0.
+- Upgrade Clojure to 1.10.2
+- Upgrade shadow-cljs to 2.10.18
+- Upgrade re-frame to 1.2.0
+
+## v0.2.2 (2020-12-21) 
+
+#### Changed
+
+- Don't require cljs-ajax API wholesale. See [#29](https://github.com/day8/re-frame-http-fx/pull/29). Thanks to [@nathell](https://github.com/nathell).
 - Upgrade ClojureScript to 1.10.773 
 - Upgrade lein-git-inject to 0.0.14
 - Upgrade shadow-cljs to 2.10.17
