@@ -20,7 +20,7 @@ Keyed `:http-xhrio`, it wraps the goog xhrio API of [cljs-ajax](https://github.c
 ### Step 1. Add Dependency
 
 Add the following project dependency: <br>
-[![clojars](https://img.shields.io/clojars/v/day8.re-frame/http-fx.svg)](https://clojars.org/day8.re-frame/http-fx)
+[![clojars](https://img.shields.io/clojars/v/day8.re-frame/http-fx?style=for-the-badge&logo=clojure&logoColor=fff)](https://clojars.org/day8.re-frame/http-fx)
 
 Requires re-frame >= 0.8.0
 
