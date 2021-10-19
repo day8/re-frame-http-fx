@@ -9,7 +9,7 @@
 
 ## HTTP Effects Handler For re-frame
 
-This re-frame library contains an HTTP [Effect Handler](https://github.com/day8/re-frame/tree/develop/docs).
+This re-frame library contains an HTTP [Effect Handler](https://github.com/day8/re-frame/blob/master/docs/Effects.md).
 
 Keyed `:http-xhrio`, it wraps the goog xhrio API of [cljs-ajax](https://github.com/JulianBirch/cljs-ajax).
 
