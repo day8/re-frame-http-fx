@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Fix link in docs, from (https://github.com/day8/re-frame/tree/develop/docs) to (https://github.com/day8/re-frame/blob/master/docs/Effects.md)
+
 ## v0.2.3 (2021-03-03)
 
 #### Changed
