@@ -1,6 +1,8 @@
 ## Unreleased
 
 - Fix link in docs, from (https://github.com/day8/re-frame/tree/develop/docs) to (https://github.com/day8/re-frame/blob/master/docs/Effects.md)
+- **Upgrade cljs-ajax to 0.8.4**. Upstream project's CHANGELOG is missing this version, appears to be [these changes](https://github.com/JulianBirch/cljs-ajax/compare/af16a67982320af360c90a0dd48228d4eaf1f3ab...91540cf7e3922826bec210cd8f8d4e89f110789e) since 0.8.1.
+
 
 ## v0.2.3 (2021-03-03)
 
